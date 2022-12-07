@@ -27,6 +27,10 @@ Route::get('/detail', function () {
     return view('detail');
 });
 
+Route::get('/mitra', function () {
+    return view('mitra');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

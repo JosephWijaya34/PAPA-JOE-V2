@@ -18,7 +18,7 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                
+
                 'papa-merah':{
                     100:'#931A25',
                     200:'#A41313'

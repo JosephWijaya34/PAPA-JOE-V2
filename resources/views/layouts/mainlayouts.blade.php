@@ -87,8 +87,10 @@
             </li>
         </ul>
     </footer> --}}
+
+    {{-- footer --}}
     <footer aria-label="Site Footer" class="bg-gray-100">
-        <div class="mx-auto max-w-5xl mt-20 px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
             <div class="flex justify-center">
                 <img src="images/logopapajoe.png" alt="logo papajoe's" srcset="">
             </div>
@@ -101,43 +103,43 @@
             <nav aria-label="Footer Nav" class="mt-12">
                 <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
                     <li>
-                        <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/">
                             Home
                         </a>
                     </li>
 
                     <li>
-                        <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/">
                             About
                         </a>
                     </li>
 
                     <li>
-                        <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/">
                             Menu
                         </a>
                     </li>
 
                     <li>
-                        <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/">
                             Services
                         </a>
                     </li>
 
                     <li>
-                        <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/">
                             Contact
                         </a>
                     </li>
 
-                    
+
                 </ul>
             </nav>
 
             <ul class="mt-12 flex justify-center gap-6 md:gap-8">
                 <li>
                     <a href="/" rel="noreferrer" target="_blank"
-                        class="text-gray-700 transition hover:text-gray-700/75">
+                        class="text-gray-700 transition hover:text-blue-500">
                         <span class="sr-only">Facebook</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -149,7 +151,7 @@
 
                 <li>
                     <a href="/" rel="noreferrer" target="_blank"
-                        class="text-gray-700 transition hover:text-gray-700/75">
+                        class="text-gray-700 transition hover:text-[#8a3ab9]">
                         <span class="sr-only">Instagram</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -161,7 +163,7 @@
 
                 <li>
                     <a href="/" rel="noreferrer" target="_blank"
-                        class="text-gray-700 transition hover:text-gray-700/75">
+                        class="text-gray-700 transition hover:text-green-500">
                         <span class="sr-only">Twitter</span>
                         <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                             fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
