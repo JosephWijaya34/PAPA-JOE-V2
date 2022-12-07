@@ -107,7 +107,7 @@
         <span class="text-sm text-gray-500 xs:text-center sm:text-center dark:text-gray-400">© 2022 <a href="#"
                 class="hover:underline">PAPA JOE'S</a>. All Rights Reserved.
         </span>
-        <ul class="flex flex-wrap items-center text-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+        <ul class="flex flex-wrap justify-center items-center text-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
             <li>
                 <a href="#" class="text-center ml-6 mr-4 hover:underline md:mr-4">Home</a>
             </li>

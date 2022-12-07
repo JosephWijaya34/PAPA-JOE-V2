@@ -4,11 +4,11 @@
 @section('content')
     <div class="container mx-auto px-10 py-10">
         <div class="Content1">
-            <div class="columns-12 text-center">
-                <div class="columns-6">
+            <div class="grid md:grid-cols-2 text-center">
+                <div>
                     <h1>Hello</h1>
                 </div>
-                <div class="columns-6">
+                <div>
                     <h1>Hello</h1>
                 </div>
             </div>
