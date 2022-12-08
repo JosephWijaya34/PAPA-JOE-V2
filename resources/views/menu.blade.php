@@ -58,9 +58,9 @@
 
                 {{-- card --}}
                 <div
-                    class="max-w-sm bg-white border mt-10 border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    class="max-w-sm bg-white border mt-10 border-gray-200 rounded-lg shadow-md relative block overflow-hidden group dark:bg-gray-800  dark:border-gray-700">
                     <a href="#">
-                        <img class="rounded-t-lg" src="/images/tesmakanan.jpeg" alt="Foto Makanan PAPA JOE'S" />
+                        <img class="rounded-t-lg object-cover w-full transition duration-500 group-hover:scale-105 sm:h-72" src="/images/tesmakanan.jpeg" alt="Foto Makanan PAPA JOE'S" />
                     </a>
                     <div class="p-5">
                         <a href="#">
