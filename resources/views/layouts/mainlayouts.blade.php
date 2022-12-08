@@ -15,7 +15,7 @@
         class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-50 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
             <a href="" class="flex items-center">
-                <img src="/images/logopapajoe.png" class="w-full" alt="PapaJoe's Logo">
+                <img src="/images/logo/logopapajoe.png" class="w-full" alt="PapaJoe's Logo">
             </a>
             <div class="flex md:order-2">
                 <button type="button"
@@ -92,7 +92,7 @@
     <footer aria-label="Site Footer" class="bg-gray-100">
         <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
             <div class="flex justify-center">
-                <img src="images/logopapajoe.png" alt="logo papajoe's" srcset="">
+                <img src="images/logo/logopapajoe.png" alt="logo papajoe's" srcset="">
             </div>
 
             <p class="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
