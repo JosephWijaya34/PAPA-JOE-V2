@@ -40,6 +40,7 @@ Route::get('/signup', function () {
     return view('authentication.signup');
 });
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
