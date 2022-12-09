@@ -7,9 +7,8 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
     {{-- !Header start --}}
-
     <header
         class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-50 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
@@ -60,7 +59,7 @@
 
     {{-- !Header End --}}
 
-    <div class="mt-20">
+    <div class="mt-20 flex-grow">
         @yield('content')
     </div>
 
