@@ -41,6 +41,10 @@ Route::get('/signup', function () {
 });
 
 
+Route::get('/cart', function () {
+    return view('cart');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
