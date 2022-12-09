@@ -31,9 +31,19 @@ Route::get('/mitra', function () {
     return view('mitra');
 });
 
+// login
+
+Route::get('/logins', function () {
+    return view('authentication.login');
+});
+Route::get('/signup', function () {
+    return view('authentication.signup');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
