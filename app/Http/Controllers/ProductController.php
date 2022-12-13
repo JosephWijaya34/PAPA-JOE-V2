@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
@@ -42,7 +44,7 @@ class ProductController extends Controller
         // validate
         $request->validate([
             'name' => 'required|max:11',
-            'price' => 'required|max:11|numeric',
+            'price' => 'required|digits_between:2,11|numeric',
             'description' => 'required|max:100',
             'image' => 'required | mimes:jpeg,jpg,png|max:2048',
         ]);
@@ -55,13 +57,14 @@ class ProductController extends Controller
             $file = $request->file('image')->store('productphotos', 'public');
         }
 
-        $product = Product::create(
+        $product = 
+        Product::create(
             [
                 'name' => $request->name,
                 'price' => $request->price,
                 'description' => $request->description,
                 'status' => $request->status,
-                'image' => $file
+                'image'=>$file,
             ]
         );
 
@@ -147,11 +150,15 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        // dd($id);
         $deletedProduct = Product::findOrFail($id);
+        // inisialiasi path
+        $path = "public/productphotos/$deletedProduct->image";
+        
         // hapus foto produk
-        if($deletedProduct->image){
-            unlink('storage/'.$deletedProduct->image);
+        if ($deletedProduct->image) {
+            if (File::exists($path)){
+                unlink('storage/' . $deletedProduct->image);
+            }
         }
         // hapus data produk
         $deletedProduct->delete();
@@ -161,5 +168,8 @@ class ProductController extends Controller
             Session::flash('message', 'Data berhasil dihapus');
         }
         return redirect('/product');
+
+
+        
     }
 }

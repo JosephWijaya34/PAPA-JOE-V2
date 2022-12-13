@@ -1,3 +1,13 @@
+/* lato */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+/* roboto */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+/* montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+html {
+  scroll-behavior: smooth;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

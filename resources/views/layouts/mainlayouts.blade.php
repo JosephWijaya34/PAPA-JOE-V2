@@ -59,21 +59,28 @@
                 <ul
                     class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
-                        <a href="/"
+                        <a href="/#home"
                             class="block text-sm py-2 pl-3 pr-4 text-white bg-red-700 rounded md:bg-transparent md:text-papa-merah-200 md:p-0 dark:text-white"
                             aria-current="page">Home</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="/#tentang"
                             class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
                     </li>
-                    <a href="/menu"
+                    <li>
+                        <a href="/menu"
                         class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Menu</a>
                     </li>
-                    <a href="#"
+                    <li>
+                        <a href="/#mitra"
+                        class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Mitra</a>
+                    </li>
+                    <li>
+                    <a href="/#mengapa"
                         class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Service</a>
                     </li>
-                    <a href="#"
+                    <li>
+                    <a href="/#kontak"
                         class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
                     </li>
                 </ul>
@@ -88,28 +95,7 @@
         @yield('content')
     </div>
 
-    {{-- <footer class="p-4 bg-white justify-center text-center rounded-lg shadow md:flex md:items-center md:justify-center md:p-6 dark:bg-gray-800">
-        <span class="text-sm text-gray-500 xs:text-center sm:text-center dark:text-gray-400">© 2022 <a href="#"
-                class="hover:underline">PAPA JOE'S</a>. All Rights Reserved.
-        </span>
-        <ul class="flex flex-wrap justify-center items-center text-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
-            <li>
-                <a href="#" class="text-center ml-6 mr-4 hover:underline md:mr-4">Home</a>
-            </li>
-            <li>
-                <a href="#" class="text-center mr-4 hover:underline md:mr-4">About</a>
-            </li>
-            <li>
-                <a href="#" class="text-center mr-4 hover:underline md:mr-4">Menu</a>
-            </li>
-            <li>
-                <a href="#" class="text-center mr-4 hover:underline md:mr-4">Partner</a>
-            </li>
-            <li>
-                <a href="#" class="hover:underline">Contact</a>
-            </li>
-        </ul>
-    </footer> --}}
+    
 
     {{-- footer --}}
     <footer aria-label="Site Footer" class="bg-gray-100">
