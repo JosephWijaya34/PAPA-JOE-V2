@@ -8,13 +8,13 @@
     <div class="mx-auto  p-7 lg:max-w-[1240px]">
         <!-- Hero section hero -->
         <section>
-            <div class=' mx-auto grid md:grid-cols-2 h-2/3'>
+            <div id="home" class=' mx-auto grid md:grid-cols-2 h-2/3'>
                 {{-- !foto di mobile --}}
                 <div class=" block md:hidden mx-auto my-auto">
                     <img src="/images/logo/logohero.png" class="" alt="logo hero papajoe">
                 </div>
 
-                <div class=" my-auto text-center md:text-left">
+                <div class=" my-auto text-center md:text-left font-lato">
                     {{-- ! text mobile --}}
                     <p class="text-3xl font-bold block md:hidden">
                         <span class="text-papa-kuning">Always</span> Give <span class="text-papa-kuning">Priority</span>
@@ -54,11 +54,11 @@
         <!-- Hero section end -->
 
         <!-- About Section Start -->
-        <section class="mt-4">
+        <section class="mt-4" id="tentang">
             <div class='w-full'>
                 <div class='max-w-[1240px] mx-auto grid md:grid-cols-2'>
                     {{-- kiri --}}
-                    <div class='my-auto flex flex-col justify-center'>
+                    <div class='my-auto flex flex-col justify-center font-lato'>
                         <p class='font-bold text-3xl'>Tentang PAPA JOE'S</p>
                         <p class='text-lg max-w-md mt-4 text-justify'>Lorem ipsum, dolor sit amet consectetur adipisicing
                             elit. Culpa
@@ -79,8 +79,8 @@
     </div>
 
     <!-- Mengapa Section Start -->
-    <div class="h-auto mt-4 bg-papa-merah-100">
-        <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+    <div id="mengapa" class="h-auto mt-4 bg-papa-merah-100">
+        <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8 font-lato" >
             <div class="mx-auto max-w-3xl text-center">
                 <h2 class="text-3xl font-bold text-papa-kuning ">
                     Mengapa Kami
@@ -145,7 +145,7 @@
     <!-- Mengapa Section End -->
 
     {{-- !menu favorit start --}}
-    <div class="mx-auto p-2 lg:mt-10 lg:max-w-[1240px]">
+    <div id="menu" class="mx-auto p-2 lg:mt-10 lg:max-w-[1240px]">
         <div class="flex flex-col justify-center items-center">
             <p class="text-3xl font-bold text-papa-merah-100">Menu Favorit</p>
             <p class="text-lg text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
@@ -218,7 +218,7 @@
 
     {{-- !kontak kami start --}}
     <!-- Container for demo purpose -->
-    <div class="h-auto bg-papa-merah-100 ">
+    <div id="kontak" class="h-auto bg-papa-merah-100 ">
 
         <div class="container  mx-auto ">
             <!-- Section: Design Block -->
