@@ -19,4 +19,6 @@ class Product extends Model
         'status',
         'image'
     ];
+
+    
 }

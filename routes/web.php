@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SocialMediaController;
 
 /*
@@ -50,6 +51,7 @@ Route::get('/cart', function () {
 // product
 Route::resource('product', ProductController::class);
 Route::resource('social', SocialMediaController::class);
+Route::resource('review', ReviewController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -66,6 +68,7 @@ Route::middleware('auth')->group(function () {
  
     Route::get('/product', [ProductController::class, 'index'])->name('productMenu');
     Route::get('/social', [SocialMediaController::class, 'index'])->name('socialMenu');
+    Route::get('/review', [ReviewController::class, 'index'])->name('reviewMenu');
     // Route::get('/product', [ProductController::class, 'index']);
     // create
     // Route::post('/product', [ProductController::class, 'store']);

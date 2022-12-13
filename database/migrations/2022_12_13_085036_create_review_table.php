@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('review', function (Blueprint $table) {
             $table->id();
-            $table->int('user_id')->nullable(false);
-            $table->string('description', 80)->nullable(false);
+            // $table->integer('user_id')->nullable(false);
+            $table->string('comment', 80)->nullable(false);
+            $table->string('status', 5)->default('no');
             $table->timestamps();
         });
     }

@@ -17,8 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-    
-        return view('admin.product',[
+
+        return view('admin.product', [
             'product' => Product::all(),
         ]);
     }
@@ -57,16 +57,16 @@ class ProductController extends Controller
             $file = $request->file('image')->store('productphotos', 'public');
         }
 
-        $product = 
-        Product::create(
-            [
-                'name' => $request->name,
-                'price' => $request->price,
-                'description' => $request->description,
-                'status' => $request->status,
-                'image'=>$file,
-            ]
-        );
+        $product =
+            Product::create(
+                [
+                    'name' => $request->name,
+                    'price' => $request->price,
+                    'description' => $request->description,
+                    'status' => $request->status,
+                    'image' => $file,
+                ]
+            );
 
         if ($product) {
             Session::flash('status', 'Success');
@@ -108,12 +108,18 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-
+        // validate
+        $request->validate([
+            'name' => 'required|max:11',
+            'price' => 'required|digits_between:2,11|numeric',
+            'description' => 'required|max:100',
+            'image' => 'required | mimes:jpeg,jpg,png|max:2048',
+        ]);
         // dd($product->image);
-     
+
         if ($request->file('image')) {
             // hapus foto produk
-            unlink('storage/'.$product->image);
+            unlink('storage/' . $product->image);
             // upload foto produk
             $file = $request->file('image')->store('productphotos', 'public');
             $product->update([
@@ -138,7 +144,7 @@ class ProductController extends Controller
             Session::flash('message', 'Edit product Success');
         }
 
- 
+
         return redirect('/product');
     }
 
@@ -152,11 +158,11 @@ class ProductController extends Controller
     {
         $deletedProduct = Product::findOrFail($id);
         // inisialiasi path
-        $path = "public/productphotos/$deletedProduct->image";
-        
+        $path = "storage/$deletedProduct->image";
+
         // hapus foto produk
         if ($deletedProduct->image) {
-            if (File::exists($path)){
+            if (File::exists($path)) {
                 unlink('storage/' . $deletedProduct->image);
             }
         }
@@ -164,12 +170,9 @@ class ProductController extends Controller
         $deletedProduct->delete();
 
         if ($deletedProduct) {
-            Session::flash('status', 'berhasil');
-            Session::flash('message', 'Data berhasil dihapus');
+            Session::flash('status', 'success');
+            Session::flash('message', 'Delete product success');
         }
         return redirect('/product');
-
-
-        
     }
 }

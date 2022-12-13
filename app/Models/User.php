@@ -43,4 +43,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // one to many
+    public function review()
+    {
+        return $this->hasMany(Review::class, 'user_id', 'id');
+    }
 }
