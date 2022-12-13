@@ -15,29 +15,6 @@
                     <div class="px-4 sm:px-6 lg:px-8">
                         {{-- !validation start --}}
 
-                             @if ($errors->any())
-                            {{-- refresh kalau ketemu error selama 5 detik --}}
-                            <meta http-equiv="refresh" content="5">
-                            <div
-                                class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800">
-                                <ul class="list-disc px-4">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        {{-- ! validation end --}}
-
-                        {{-- !message start --}}
-                        @if (Session::has('status'))
-                            <meta http-equiv="refresh" content="3">
-                            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
-                                role="alert">
-                                {{ Session::get('message') }}
-                            </div>
-                        @endif
-                        {{-- !message end --}}
 
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
@@ -355,5 +332,5 @@
         @endforeach
 
 
-
+    </div>
 </x-app-layout>

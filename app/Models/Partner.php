@@ -16,7 +16,6 @@ class Partner extends Model
         'name',
         'location',
         'description',
-        'status',
         'phone',
         'image_partner'
     ];

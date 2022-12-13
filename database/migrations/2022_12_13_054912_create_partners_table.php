@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('location');
             $table->string('description');
-            $table->string('status');
             $table->string('phone');
             $table->string('image_partner');
             $table->timestamps();

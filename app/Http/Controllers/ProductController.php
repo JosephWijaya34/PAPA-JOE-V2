@@ -57,7 +57,7 @@ class ProductController extends Controller
             $file = $request->file('image')->store('productphotos', 'public');
         }
 
-        $product = 
+        $product =
         Product::create(
             [
                 'name' => $request->name,
@@ -72,7 +72,7 @@ class ProductController extends Controller
             Session::flash('status', 'Success');
             Session::flash('message', 'Add new product success');
         }
-        return redirect('/mitra');
+        return redirect('/product');
     }
 
     /**
@@ -153,7 +153,7 @@ class ProductController extends Controller
         $deletedProduct = Product::findOrFail($id);
         // inisialiasi path
         $path = "public/productphotos/$deletedProduct->image";
-        
+
         // hapus foto produk
         if ($deletedProduct->image) {
             if (File::exists($path)){
@@ -170,6 +170,6 @@ class ProductController extends Controller
         return redirect('/product');
 
 
-        
+
     }
 }

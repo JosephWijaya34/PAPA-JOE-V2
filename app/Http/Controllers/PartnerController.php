@@ -35,7 +35,7 @@ class PartnerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePartnerRequest  $request
+     * @param  \App\Http\Requests\StorePartnerRequest
      * @return \Illuminate\Http\Response
      */
     public function store(StorePartnerRequest $request)
@@ -44,7 +44,6 @@ class PartnerController extends Controller
             'name' => 'required|max:11',
             'location' => 'required|max:11|numeric',
             'description' => 'required|max:100',
-            'status' => 'required|max:50',
             'phone' => 'required|max:13',
             'image_partner' => 'required | mimes:jpeg,jpg,png|max:2048',
         ]);
@@ -54,7 +53,7 @@ class PartnerController extends Controller
         if ($request->file('image_partner') == null) {
             $file = "";
         } else {
-            $file = $request->file('image_partner')->store('productphotos', 'public');
+            $file = $request->file('image_partner')->store('partnerphotos', 'public');
         }
 
         $partner = Partner::create(
@@ -62,7 +61,6 @@ class PartnerController extends Controller
                 'name' => $request->name,
                 'location' => $request->location,
                 'description' => $request->description,
-                'status' => $request->status,
                 'phone' => $request->phone,
                 'image_partner' => $file
             ]
@@ -71,7 +69,7 @@ class PartnerController extends Controller
             Session::flash('status', 'Success');
             Session::flash('message', 'Add new product success');
         }
-        return redirect('/product');
+        return redirect('/mitra');
 
     }
 
