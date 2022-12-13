@@ -15,12 +15,20 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->keyword;
+      
 
-        return view('admin.product', [
-            'product' => Product::all(),
-        ]);
+        if($request->has('keyword')){
+            return view('admin.product', [
+                'product' => Product::where('name','LIKE','%'.$keyword.'%')->orWhere('price','like','%'.$keyword.'%')->paginate(5),
+            ]);
+        }else{
+            return view('admin.product', [
+                'product' => Product::paginate(5),
+            ]);
+        }
     }
 
     /**
@@ -106,6 +114,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         //
         $product = Product::findOrFail($id);
         // validate
@@ -113,7 +122,7 @@ class ProductController extends Controller
             'name' => 'required|max:11',
             'price' => 'required|digits_between:2,11|numeric',
             'description' => 'required|max:100',
-            'image' => 'required | mimes:jpeg,jpg,png|max:2048',
+            'image' => 'mimes:jpeg,jpg,png|max:2048',
         ]);
         // dd($product->image);
 
