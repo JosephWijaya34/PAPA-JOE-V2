@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-    
+
         return view('admin.product',[
             'product' => Product::all(),
         ]);
@@ -69,7 +69,7 @@ class ProductController extends Controller
             Session::flash('status', 'Success');
             Session::flash('message', 'Add new product success');
         }
-        return redirect('/product');
+        return redirect('/mitra');
     }
 
     /**
@@ -107,7 +107,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         // dd($product->image);
-     
+
         if ($request->file('image')) {
             // hapus foto produk
             unlink('storage/'.$product->image);
@@ -135,7 +135,7 @@ class ProductController extends Controller
             Session::flash('message', 'Edit product Success');
         }
 
- 
+
         return redirect('/product');
     }
 

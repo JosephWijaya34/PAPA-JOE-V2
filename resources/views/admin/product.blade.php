@@ -14,7 +14,7 @@
                     {{-- !table start --}}
                     <div class="px-4 sm:px-6 lg:px-8">
                         {{-- !validation start --}}
-                        
+
 
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
@@ -115,7 +115,7 @@
 
                                                         <td
                                                             class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
-                                                        
+
                                                             <a type="button"
                                                                 class="text-indigo-600 hover:text-indigo-900"
                                                                 data-modal-toggle="editModal{{ $data->id }}">Edit
@@ -208,7 +208,7 @@
                                     <option value="aktif">Aktif</option>
                                     <option value="terlaris">Terlartis</option>
                                     <option value="tidak">Tidak Aktif</option>
-                                    
+
                                 </select>
 
                             </div>

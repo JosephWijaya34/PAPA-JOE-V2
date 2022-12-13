@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PartnerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -50,6 +51,7 @@ Route::get('/cart', function () {
 // product
 Route::resource('product', ProductController::class);
 Route::resource('social', SocialMediaController::class);
+Route::resource('mitra', PartnerController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -61,15 +63,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-   
+
     // !product
- 
+
     Route::get('/product', [ProductController::class, 'index'])->name('productMenu');
     Route::get('/social', [SocialMediaController::class, 'index'])->name('socialMenu');
+    Route::get('/mitra', [PartnerController::class, 'index'])->name('mitraMenu');
+
     // Route::get('/product', [ProductController::class, 'index']);
     // create
     // Route::post('/product', [ProductController::class, 'store']);
-   
+
     // // delete
     // Route::delete('/product-delete/{id}', [ProductController::class, 'destroy']);
 
