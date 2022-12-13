@@ -15,11 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::get();
-        return view('admin.product', ['product' => $product]);
-        // return view('admin.product',[
-        //     'product' => Product::all()
-        // ]);
+    
+        return view('admin.product',[
+            'product' => Product::all(),
+        ]);
     }
 
     /**
@@ -45,7 +44,7 @@ class ProductController extends Controller
             'name' => 'required|max:11',
             'price' => 'required|max:11|numeric',
             'description' => 'required|max:100',
-            'image' => 'required',
+            'image' => 'required | mimes:jpeg,jpg,png|max:2048',
         ]);
 
         // dd($request->all());
@@ -107,34 +106,37 @@ class ProductController extends Controller
         //
         $product = Product::findOrFail($id);
 
-        dd($product->image);
+        // dd($product->image);
+     
+        if ($request->file('image')) {
+            // hapus foto produk
+            unlink('storage/'.$product->image);
+            // upload foto produk
+            $file = $request->file('image')->store('productphotos', 'public');
+            $product->update([
+                'name' => $request->name,
+                'price' => $request->price,
+                'description' => $request->description,
+                'status' => $request->status,
+                'image' => $file,
+            ]);
+        } else {
+            $product->update([
+                'name' => $request->name,
+                'price' => $request->price,
+                'description' => $request->description,
+                'status' => $request->status,
+            ]);
+        }
 
 
-        // if ($request->file('image')) {
-        //     unlink('storage/'.$product->image);
-        //     $product->update([
-        //         'name' => $request->name,
-        //         'price' => $request->price,
-        //         'description' => $request->description,
-        //         'status' => $request->status,
-        //         'image' => $request->file('image')->store('productphotos', 'public'),
-        //     ]);
-        // } else {
-        //     $product->update([
-        //         'name' => $request->name,
-        //         'price' => $request->price,
-        //         'description' => $request->description,
-        //         'status' => $request->status,
-        //     ]);
-        // }
+        if ($product) {
+            Session::flash('status', 'Success');
+            Session::flash('message', 'Edit product Success');
+        }
 
-
-        // if ($product) {
-        //     Session::flash('status', 'Success');
-        //     Session::flash('message', 'Edit product Success');
-        // }
-        // $product->update($request->all());
-        // return redirect('/product');
+ 
+        return redirect('/product');
     }
 
     /**
@@ -147,6 +149,11 @@ class ProductController extends Controller
     {
         // dd($id);
         $deletedProduct = Product::findOrFail($id);
+        // hapus foto produk
+        if($deletedProduct->image){
+            unlink('storage/'.$deletedProduct->image);
+        }
+        // hapus data produk
         $deletedProduct->delete();
 
         if ($deletedProduct) {

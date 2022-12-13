@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('socialmedia', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 40)->nullable(false);
-            $table->integer('price')->nullable(false);
-            $table->string('description', 100)->nullable(false);
-            $table->string('status', 10)->nullable(false)->default('aktif');
-            $table->string('image', 255)->nullable(false);
             $table->timestamps();
-
-            
+            $table->string('facebook', 40)->nullable(false);
+            $table->string('instagram', 40)->nullable(false);
+            $table->string('whatsapp', 40)->nullable(false);
         });
     }
 
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('socialmedia');
     }
 };
