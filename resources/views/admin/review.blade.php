@@ -29,8 +29,9 @@
 
                         {{-- !message start --}}
                         @if (Session::has('status'))
+                           
                             <meta http-equiv="refresh" content="3">
-                            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+                            <div class="p-4 mb-4 text-sm  {{ Session::get('status') == 'error'  ? 'text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800' : ' text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800' }} "
                                 role="alert">
                                 {{ Session::get('message') }}
                             </div>

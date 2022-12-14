@@ -56,12 +56,12 @@ class ReviewController extends Controller
                 ]
             );
             if ($review) {
-                Session::flash('status', 'Success');
-                Session::flash('message', 'Add new product success');
+                Session::flash('status', 'success');
+                Session::flash('message', 'Add new review success');
             }
            
          } else {
-            Session::flash('status', 'Error');
+            Session::flash('status', 'error');
             Session::flash('message', 'Kamu sudah pernah melakukan review');
          }
          return redirect('/review');
@@ -124,7 +124,7 @@ class ReviewController extends Controller
         // hapus data produk
         $deletedReview->delete();
         if ($deletedReview) {
-            Session::flash('status', 'success');
+            Session::flash('status', 'error');
             Session::flash('message', 'Delete review success');
         }
         return redirect('/review');
