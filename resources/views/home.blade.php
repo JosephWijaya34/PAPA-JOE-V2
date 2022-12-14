@@ -206,15 +206,12 @@
 
             <div class="w-full px-4">
                 <div class="flex flex-wrap items-center justify-center">
-                    <a href="/mitra"
-                        class="mx-4 max-w-[200px] py-4 transition duration-500 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8 xl:opacity-60 xl:grayscale">
-                        <img src="images/mitra/hokky.png" alt="Logo Hokky" title="hokky darmo" />
-                    </a>
-
-                    <a href="/mitra"
-                        class="mx-4 max-w-[200px] py-4 transition duration-500 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8 xl:opacity-60 xl:grayscale">
-                        <img src="images/mitra/chicco.png" alt="Logo Chicco" />
-                    </a>
+                    @foreach ($partner as $mitra)
+                        <a href="/mitra/{{ $mitra->id }}"
+                            class="mx-4 max-w-[200px] py-4 transition duration-500 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8 xl:opacity-60 xl:grayscale">
+                            <img src="storage/{{ $mitra->image_partner }}" alt="Logo {{ $mitra->name }}" title="{{ $mitra->name }}" />
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </div>

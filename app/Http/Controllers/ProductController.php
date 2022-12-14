@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-      
+
 
         if($request->has('keyword')){
             return view('admin.product', [
@@ -93,7 +93,7 @@ class ProductController extends Controller
         //
         $product = Product::findOrFail($id);
         return view('detail', ['product'=>$product]);
-    
+
     }
 
     /**
@@ -185,17 +185,5 @@ class ProductController extends Controller
             Session::flash('message', 'Delete product success');
         }
         return redirect('/product');
-    }
-
-    public function menu_user(){
-        return view('menu', [
-            'product' => Product::get()
-        ]);
-    }
-
-    public function home_user(){
-        return view('home', [
-            'product' => Product::get()
-        ]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PartnerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -16,7 +17,7 @@ use App\Http\Controllers\SocialMediaController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 
-a.route resource 
+a.route resource
 
 1.home
 2.menu
@@ -27,9 +28,10 @@ a.route resource
 // halaman user
 
 // home start
-Route::get('/', [ProductController::class, 'home_user']);
+Route::get('/', [HomeController::class, 'home_user']);
 Route::get('/detail/{id}', [ProductController::class, 'show']);
-Route::get('/menu', [ProductController::class, 'menu_user']);
+Route::get('/mitra/{id}', [PartnerController::class, 'show']);
+Route::get('/menu', [HomeController::class, 'menu_user']);
 // home end
 
 
@@ -57,7 +59,7 @@ Route::get('/cart', function () {
     return view('cart');
 });
 
-// route resource 
+// route resource
 Route::resource('product', ProductController::class);
 Route::resource('social', SocialMediaController::class);
 Route::resource('mitra', PartnerController::class);
@@ -76,14 +78,13 @@ Route::middleware('auth')->group(function () {
 
     // !product
 
-    Route::get('/product', [ProductController::class, 'index'])->name('productMenu');
-    Route::get('/social', [SocialMediaController::class, 'index'])->name('socialMenu');
-    Route::get('/mitra', [PartnerController::class, 'index'])->name('mitraMenu');
+    // Route::get('/product', [ProductController::class, 'index'])->name('productMenu');
+    // Route::get('/social', [SocialMediaController::class, 'index'])->name('socialMenu');
 
-   
     // !route halaman admin
     Route::get('/product', [ProductController::class, 'index'])->name('productMenu');
     Route::get('/social', [SocialMediaController::class, 'index'])->name('socialMenu');
+    Route::get('/mitra', [PartnerController::class, 'index'])->name('mitraMenu');
     Route::get('/review', [ReviewController::class, 'index'])->name('reviewMenu');
     // Route::get('/product', [ProductController::class, 'index']);
     // create
