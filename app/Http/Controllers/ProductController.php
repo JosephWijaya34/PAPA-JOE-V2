@@ -17,6 +17,10 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 882c4669d2b33c363b8d080d16ccff4632aeab02
 
 
         if ($request->has('keyword')) {
@@ -93,7 +97,12 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($id);
+<<<<<<< HEAD
         return view('detail', ['product' => $product]);
+=======
+        return view('detail', ['product'=>$product]);
+
+>>>>>>> 882c4669d2b33c363b8d080d16ccff4632aeab02
     }
 
     /**
@@ -189,6 +198,7 @@ class ProductController extends Controller
         }
         return redirect('/product');
     }
+<<<<<<< HEAD
 
     public function menu_user(Request $request)
     {
@@ -220,4 +230,6 @@ class ProductController extends Controller
             'product' => Product::get()
         ]);
     }
+=======
+>>>>>>> 882c4669d2b33c363b8d080d16ccff4632aeab02
 }

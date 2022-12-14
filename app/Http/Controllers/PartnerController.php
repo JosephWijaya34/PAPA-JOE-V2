@@ -80,9 +80,10 @@ class PartnerController extends Controller
      * @param  \App\Models\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function show(Partner $partner)
+    public function show($id)
     {
-        //
+        $partner = Partner::findOrFail($id);
+        return view('mitra', ['partner'=>$partner]);
     }
 
     /**
@@ -109,11 +110,11 @@ class PartnerController extends Controller
 
         // dd($product->image);
 
-        if ($request->file('image')) {
+        if ($request->file('image_partner')) {
             // hapus foto produk
             unlink('storage/' . $partner->image_partner);
             // upload foto produk
-            $file = $request->file('image_partner')->store('mitraphotos', 'public');
+            $file = $request->file('image_partner')->store('partnerphotos', 'public');
             $partner->update([
                 'name' => $request->name,
                 'location' => $request->location,
@@ -160,7 +161,7 @@ class PartnerController extends Controller
             }
         }
 
-  
+
         // hapus data produk
         $deletedMitra->delete();
 
