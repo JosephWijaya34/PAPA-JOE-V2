@@ -77,7 +77,7 @@
                                             </thead>
                                             <tbody class="divide-y divide-gray-200 bg-white text-center">
 
-
+                                               
                                                 @foreach ($review as $data)
                                                     <tr>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 ">

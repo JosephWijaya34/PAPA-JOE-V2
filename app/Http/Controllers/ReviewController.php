@@ -52,7 +52,6 @@ class ReviewController extends Controller
                     'user_id' => $user_id,
                     'comment' => $request->comment,
 
-                    
                 ]
             );
             if ($review) {

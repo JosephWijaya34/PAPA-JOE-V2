@@ -22,7 +22,7 @@ class ProductController extends Controller
 
         if($request->has('keyword')){
             return view('admin.product', [
-                'product' => Product::where('name','LIKE','%'.$keyword.'%')->orWhere('price','like','%'.$keyword.'%')->paginate(5),
+                'product' => Product::where('name','LIKE','%'.$keyword.'%')->orWhere('price','like','%'.$keyword.'%')->orWhere('status','like','%'.$keyword.'%')->paginate(5),
             ]);
         }else{
             return view('admin.product', [
@@ -92,6 +92,9 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+        $product = Product::findOrFail($id);
+        return view('detail', ['product'=>$product]);
+    
     }
 
     /**
@@ -183,5 +186,17 @@ class ProductController extends Controller
             Session::flash('message', 'Delete product success');
         }
         return redirect('/product');
+    }
+
+    public function menu_user(){
+        return view('menu', [
+            'product' => Product::get()
+        ]);
+    }
+
+    public function home_user(){
+        return view('home', [
+            'product' => Product::get()
+        ]);
     }
 }

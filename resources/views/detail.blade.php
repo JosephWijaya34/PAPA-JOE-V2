@@ -2,6 +2,7 @@
 @section('title', 'Detail')
 
 @section('content')
+
     <div class="container mx-auto px-5 py-5">
         <div class="ml-10 mb-5 mr-10 my-auto">
             <a href="/"><button class="hover:text-red-500 rounded font-bold text-lg">
@@ -10,14 +11,12 @@
         </div>
         <div class="grid md:grid-cols-2">
             <div class="pl-10 pr-10 pb-10">
-                <img class="rounded-md mx-auto" src="/images/tesmakanan.jpeg" alt="Foto Makanan PAPA JOE'S" />
+                <img class="rounded-md mx-auto" src="{{ asset('storage/' . $product->image) }}" alt="Foto Makanan PAPA JOE'S" />
             </div>
             <div class="mr-5 ml-5">
-                <H1 class="mb-5 font-bold md:text-3xl">Nama Makanan</H1>
-                <h3 class="mb-5 md:text-xl">Rp25.000,00</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam facilis ipsum nulla aspernatur blanditiis
-                    vero dolorem possimus laborum provident? Odio corrupti alias eos, fuga error adipisci earum odit! Fuga,
-                    id!</p>
+                <H1 class="mb-5 font-bold md:text-3xl">{{ $product->name }}</H1>
+                <h3 class="mb-5 md:text-xl">@currency($product->price)</h3>
+                <p>{{ $product->description }}</p>
 
                 <div class="flex mt-5">
                     <div class="">

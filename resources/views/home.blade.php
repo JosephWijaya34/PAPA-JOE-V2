@@ -32,11 +32,11 @@
                     </p>
 
                     <button type="button"
-                        class="text-white  mt-4 w-[140px] py-[10px] px-7 bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-md text-smtext-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Contact
+                        class="  duration-400 text-white  mt-4 w-[140px] py-[10px] px-7 bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-md text-smtext-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Contact
                         Us</button>
 
                     <button type="button"
-                        class="text-gray-900 mt-4 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Our
+                        class="transition duration-400 text-gray-900 mt-4 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Our
                         Menu</button>
 
                 </div>
@@ -80,7 +80,7 @@
 
     <!-- Mengapa Section Start -->
     <div id="mengapa" class="h-auto mt-4 bg-papa-merah-100">
-        <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8 font-lato" >
+        <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8 font-lato">
             <div class="mx-auto max-w-3xl text-center">
                 <h2 class="text-3xl font-bold text-papa-kuning ">
                     Mengapa Kami
@@ -146,40 +146,46 @@
 
     {{-- !menu favorit start --}}
     <div id="menu" class="mx-auto p-2 lg:mt-10 lg:max-w-[1240px]">
-        <div class="flex flex-col justify-center items-center">
+        <div class="flex flex-col justify-center content-center items-center">
             <p class="text-3xl font-bold text-papa-merah-100">Menu Favorit</p>
             <p class="text-lg text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-mt-4">
+        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
 
             {{-- card --}}
-            <div
-                class="max-w-sm bg-white border mt-10 border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <a href="#">
-                    <img class="rounded-t-lg" src="/images/tesmakanan.jpeg" alt="Foto Makanan PAPA JOE'S" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white md:text-2xl">Sushi
-                            Salmon</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-xs md:text-lg">Sushi dengan isian
-                        salmon dan diberi saus khas papa joe.</p>
-                    <div class="mx-auto text-center">
-                        <a href="/detail"
-                            class="inline-flex items-center px-10 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-papa-merah-100 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-papa-merah-100">
-                            Detail
-                            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
+            @foreach ($product as $data)
+                @if ($data->status == 'terlaris')
+                    <div
+                        class="max-w-sm bg-white border mt-10 border-gray-200 rounded-lg shadow-md relative block overflow-hidden group dark:bg-gray-800  dark:border-gray-700">
+                        <a href="/detail/{{ $data->id }}">
+                            <img class="rounded-t-lg object-cover w-full transition duration-500 group-hover:scale-105 h-32 md:h-72"
+                                src="{{ asset('storage/' . $data->image) }}" alt="Foto Makanan PAPA JOE'S" />
                         </a>
+                        <div class="p-5">
+                            <a href="/detail/{{ $data->id }}">
+                                <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white md:text-2xl">
+                                    {{ $data->name }}</h5>
+                            </a>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-xs md:text-lg">
+                                {{ $data->description }}</p>
+                            <div class="mx-auto text-center">
+                                <a href="/detail/{{ $data->id }}"
+                                    class="inline-flex items-center px-10 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-papa-merah-100 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-papa-merah-100">
+                                    Detail
+                                    <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                @endif
+            @endforeach
+
         </div>
     </div>
     {{-- !menu favorit end --}}
@@ -202,7 +208,7 @@
                 <div class="flex flex-wrap items-center justify-center">
                     <a href="/mitra"
                         class="mx-4 max-w-[200px] py-4 transition duration-500 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8 xl:opacity-60 xl:grayscale">
-                        <img src="images/mitra/hokky.png" alt="Logo Hokky" />
+                        <img src="images/mitra/hokky.png" alt="Logo Hokky" title="hokky darmo" />
                     </a>
 
                     <a href="/mitra"
