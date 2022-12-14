@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('price')->nullable(false);
             $table->string('description', 100)->nullable(false);
             $table->string('status', 10)->nullable(false)->default('aktif');
+            $table->string('kategori', 10)->nullable(false)->default('halal');
             $table->string('image', 255)->nullable(false);
             $table->timestamps();
 

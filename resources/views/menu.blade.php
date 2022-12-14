@@ -35,7 +35,7 @@
 
             <div class="mt-2 md:w-1/2 mx-auto">
             {{-- Filter dropdown start --}}
-            <form>
+            <form action="" method="GET">
                 <div class="flex">
                     <label for="search-dropdown"
                         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label>
@@ -53,20 +53,20 @@
                         style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(897px, 5637px, 0px);">
                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
                             <li>
-                                <button type="button"
+                                <button name="tipe" value="halal"
                                     class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pork</button>
                             </li>
                             <li>
-                                <button type="button"
+                                <button name="tipe" value="nonhalal"
                                     class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">No
                                     Pork</button>
                             </li>
                         </ul>
                     </div>
                     <div class="relative w-full">
-                        <input type="search" id="search-dropdown"
+                        <input type="search" id="search-dropdown" name="keyword"
                             class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                            placeholder="Car sushi, nasi, dll..." required>
+                            placeholder="Car sushi, nasi, dll..." >
                         <button type="submit"
                             class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-red-700 rounded-r-lg border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                             <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor"

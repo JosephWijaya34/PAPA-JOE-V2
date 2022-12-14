@@ -76,15 +76,15 @@ Route::middleware('auth')->group(function () {
 
     // !product
 
-    Route::get('/product', [ProductController::class, 'index'])->name('productMenu');
-    Route::get('/social', [SocialMediaController::class, 'index'])->name('socialMenu');
-    Route::get('/mitra', [PartnerController::class, 'index'])->name('mitraMenu');
+
+
 
    
     // !route halaman admin
     Route::get('/product', [ProductController::class, 'index'])->name('productMenu');
     Route::get('/social', [SocialMediaController::class, 'index'])->name('socialMenu');
     Route::get('/review', [ReviewController::class, 'index'])->name('reviewMenu');
+    Route::get('/mitra', [PartnerController::class, 'index'])->name('mitraMenu');
     // Route::get('/product', [ProductController::class, 'index']);
     // create
     // Route::post('/product', [ProductController::class, 'store']);

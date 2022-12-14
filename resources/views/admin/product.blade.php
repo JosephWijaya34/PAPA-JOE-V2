@@ -6,12 +6,37 @@
         </h2>
     </x-slot>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class=" mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
 
-                    
+                    {{-- !table start --}}
+                    <div class="px-4 sm:px-6 lg:px-8">
+                        {{-- !validation start --}}
+                        @if ($errors->any())
+                            {{-- refresh kalau ketemu error selama 5 detik --}}
+                            <meta http-equiv="refresh" content="5">
+                            <div
+                                class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800">
+                                <ul class="list-disc px-4">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        {{-- ! validation end --}}
+
+                        {{-- !message start --}}
+                        @if (Session::has('status'))
+                            <meta http-equiv="refresh" content="3">
+                            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+                                role="alert">
+                                {{ Session::get('message') }}
+                            </div>
+                        @endif
+                        {{-- !message end --}}
 
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
@@ -44,11 +69,11 @@
                                     </div>
                                     <input type="search" id="default-search" name="keyword"
                                         class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Nama produk, status,(aktif, terlaris, tidak) dll" >
+                                        placeholder="Nama produk, status,(aktif, terlaris, tidak) dll">
                                     <button type="submit"
                                         class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                                 </div>
-                            </form>
+
                         </div>
                         {{-- !search end --}}
                         <div class="mt-8 flex flex-col">
@@ -76,6 +101,9 @@
                                                     <th scope="col"
                                                         class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
                                                         Status</th>
+                                                    <th scope="col"
+                                                        class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
+                                                        Kategori</th>
                                                     <th scope="col"
                                                         class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
                                                         Action</th>
@@ -135,6 +163,20 @@
                                                             @endif
 
                                                         </td>
+
+
+                                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            @if ($data->kategori == 'halal')
+                                                            <span
+                                                                class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">Halal
+                                                            </span>
+                                                            @else
+                                                            <span
+                                                                class="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-red-800">Non Halal
+                                                            </span>
+                                                            @endif
+                                                        </td>
+
 
                                                         <td
                                                             class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
@@ -242,6 +284,21 @@
 
                             <div class="mb-6">
 
+                                <label for="kategori"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
+                                <select id="kategori" name="kategori"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected>Pilih kategori</option>
+                                    <option value="halal">Halal</option>
+                                    <option value="nonhalal">Non Halal</option>
+
+
+                                </select>
+
+                            </div>
+
+                            <div class="mb-6">
+
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     for="image">Photo Product</label>
                                 <input
@@ -334,6 +391,26 @@
                                         <option value="tidak">Tidak Aktif</option>
                                     </select>
 
+                                </div>
+
+                                
+                                <div class="mb-6">
+                                    <label for="kategori"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
+                                    <select id="kategori" name="kategori"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                        <option selected value="{{ $data->kategori }}">
+                                            @if ($data->kategori == 'halal')
+                                               Halal
+                                            @elseif ($data->kategori == 'nonhalal')
+                                                Non Halal
+                                            @endif
+                                        </option>
+                                        <option value="terlaris">Halal</option>
+                                        <option value="aktif">Non Halal</option>
+                                       
+                                    </select>
                                 </div>
 
                                 <div class="mb-6">

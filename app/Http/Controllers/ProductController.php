@@ -138,6 +138,7 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'description' => $request->description,
                 'status' => $request->status,
+                'kategori' => $request->kategori,
                 'image' => $file,
             ]);
         } else {
@@ -146,6 +147,8 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'description' => $request->description,
                 'status' => $request->status,
+                'kategori' => $request->kategori,
+              
             ]);
         }
 
@@ -187,10 +190,29 @@ class ProductController extends Controller
         return redirect('/product');
     }
 
-    public function menu_user(){
-        return view('menu', [
-            'product' => Product::get()
-        ]);
+    public function menu_user(Request $request){
+        // return view('menu', [
+        //     'product' => Product::get()
+        // ]);
+
+        $keyword = $request->keyword;
+        if (request()->has('tipe')) {
+            
+        }
+
+        if($request->has('keyword')){
+            return view('menu', [
+                'product' => Product::where('name','LIKE','%'.$keyword.'%')->orWhere('price','like','%'.$keyword.'%')->orWhere('status','like','%'.$keyword.'%')->paginate(5),
+            ]);
+        }else{
+            return view('menu', [
+                'product' => Product::paginate(5)
+            ]);
+            
+        }
+
+       
+        
     }
 
     public function home_user(){
