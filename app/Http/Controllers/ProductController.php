@@ -15,12 +15,20 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->keyword;
+      
 
-        return view('admin.product',[
-            'product' => Product::all(),
-        ]);
+        if($request->has('keyword')){
+            return view('admin.product', [
+                'product' => Product::where('name','LIKE','%'.$keyword.'%')->orWhere('price','like','%'.$keyword.'%')->orWhere('status','like','%'.$keyword.'%')->paginate(5),
+            ]);
+        }else{
+            return view('admin.product', [
+                'product' => Product::paginate(5),
+            ]);
+        }
     }
 
     /**
@@ -67,6 +75,16 @@ class ProductController extends Controller
                 'image'=>$file,
             ]
         );
+        $product =
+            Product::create(
+                [
+                    'name' => $request->name,
+                    'price' => $request->price,
+                    'description' => $request->description,
+                    'status' => $request->status,
+                    'image' => $file,
+                ]
+            );
 
         if ($product) {
             Session::flash('status', 'Success');
@@ -84,6 +102,9 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+        $product = Product::findOrFail($id);
+        return view('detail', ['product'=>$product]);
+    
     }
 
     /**
@@ -106,14 +127,22 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         //
         $product = Product::findOrFail($id);
-
+        // validate
+        $request->validate([
+            'name' => 'required|max:11',
+            'price' => 'required|digits_between:2,11|numeric',
+            'description' => 'required|max:100',
+            'image' => 'mimes:jpeg,jpg,png|max:2048',
+        ]);
         // dd($product->image);
+
 
         if ($request->file('image')) {
             // hapus foto produk
-            unlink('storage/'.$product->image);
+            unlink('storage/' . $product->image);
             // upload foto produk
             $file = $request->file('image')->store('productphotos', 'public');
             $product->update([
@@ -156,7 +185,7 @@ class ProductController extends Controller
 
         // hapus foto produk
         if ($deletedProduct->image) {
-            if (File::exists($path)){
+            if (File::exists($path)) {
                 unlink('storage/' . $deletedProduct->image);
             }
         }
@@ -164,12 +193,23 @@ class ProductController extends Controller
         $deletedProduct->delete();
 
         if ($deletedProduct) {
-            Session::flash('status', 'berhasil');
-            Session::flash('message', 'Data berhasil dihapus');
+            Session::flash('status', 'success');
+            Session::flash('message', 'Delete product success');
         }
         return redirect('/product');
+    }
 
+    public function menu_user(){
+        return view('menu', [
+            'product' => Product::get()
+        ]);
+    }
 
+    public function home_user(){
+        return view('home', [
+            'product' => Product::get()
+        ]);
+    }
 
     }
-}
+

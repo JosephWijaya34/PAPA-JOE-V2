@@ -13,7 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('review', function (Blueprint $table) {
+            $table->id();
+            // $table->integer('user_id')->nullable(false);
+            $table->string('comment', 80)->nullable(false);
+            $table->string('status', 5)->default('no');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('review');
     }
 };

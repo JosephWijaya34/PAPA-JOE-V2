@@ -20,15 +20,40 @@
                             <div class="sm:flex-auto">
                                 <h1 class="text-xl font-semibold text-gray-900">Product</h1>
                                 <p class="mt-2 text-sm text-gray-700">Halaman Product</p>
+
                             </div>
                             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+
                                 <button type="button"
                                     class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
                                     type="button" data-modal-toggle="staticModal">Add
                                     product</button>
                             </div>
-                        </div>
 
+                        </div>
+                        {{-- !search start --}}
+                        <div class="mt-2">
+                            <form form action="" method="GET">
+                                <label for="default-search"
+                                    class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                            fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <input type="search" id="default-search" name="keyword"
+                                        class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Nama produk, status,(aktif, terlaris, tidak) dll" >
+                                    <button type="submit"
+                                        class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                        {{-- !search end --}}
                         <div class="mt-8 flex flex-col">
                             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -101,9 +126,10 @@
                                                                     class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">Active
                                                                 </span>
                                                             @elseif ($data->status == 'terlaris')
-                                                            <span
-                                                            class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">Best Seller
-                                                        </span>
+                                                                <span
+                                                                    class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">Best
+                                                                    Seller
+                                                                </span>
                                                             @else
                                                                 <span
                                                                     class="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-red-800">Non
@@ -119,7 +145,7 @@
                                                             <a type="button"
                                                                 class="text-indigo-600 hover:text-indigo-900"
                                                                 data-modal-toggle="editModal{{ $data->id }}">Edit
-                                                                </a>
+                                                            </a>
 
                                                             <form action="{{ route('product.destroy', $data->id) }}"
                                                                 method="POST">
@@ -137,6 +163,10 @@
                                                 <!-- More people... -->
                                             </tbody>
                                         </table>
+                                        <div class="p-9">
+                                            {{ $product->links() }}
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +238,7 @@
                                     <option value="aktif">Aktif</option>
                                     <option value="terlaris">Terlartis</option>
                                     <option value="tidak">Tidak Aktif</option>
-
+                                    
                                 </select>
 
                             </div>
@@ -235,8 +265,8 @@
         </div>
 
         <!-- Main modal edit-->
-        @foreach ($product as $produk)
-            <div id="editModal{{ $produk->id }}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+        @foreach ($product as $data)
+            <div id="editModal{{ $data->id }}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
                 <div class="relative w-full h-full max-w-2xl md:h-auto">
                     <!-- Modal content -->
@@ -260,7 +290,7 @@
                         <!-- Modal body -->
                         <div class="p-6 space-y-6">
 
-                            <form action="{{ route('product.update', $produk->id) }}" method="POST"
+                            <form action="{{ route('product.update', $data->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -275,7 +305,7 @@
                                     <label for="description"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi</label>
                                     <textarea id="description" name="description"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ $produk->description }}</textarea>
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">{{ $data->description }}</textarea>
                                 </div>
 
                                 <div class="mb-6">
@@ -283,7 +313,7 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
                                     <input type="number" id="price" name="price"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        value="{{ $produk->price }}">
+                                        value="{{ $data->price }}">
                                 </div>
 
                                 <div class="mb-6">
@@ -293,12 +323,12 @@
                                     <select id="status" name="status"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                                        <option selected value="{{ $produk->status }}">
-                                            @if ($produk->status == 'tidak')
+                                        <option selected value="{{ $data->status }}">
+                                            @if ($data->status == 'tidak')
                                                 Tidak Aktif
-                                            @elseif ($produk->status == 'aktif')
+                                            @elseif ($data->status == 'aktif')
                                                 Aktif
-                                            @elseif ($produk->status == 'terlaris')
+                                            @elseif ($data->status == 'terlaris')
                                                 Terlaris
                                             @endif
                                         </option>
@@ -319,9 +349,9 @@
 
                                 </div>
 
-                                <button data-modal-toggle="editModal{{ $produk->id }}" type="submit"
+                                <button data-modal-toggle="editModal{{ $data->id }}" type="submit"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
-                                <button data-modal-toggle="editModal{{ $produk->id }}" type="button"
+                                <button data-modal-toggle="editModal{{ $data->id }}" type="button"
                                     class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Back</button>
                             </form>
                         </div>

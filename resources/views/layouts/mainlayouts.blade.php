@@ -57,10 +57,10 @@
             </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul
-                    class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 nav">
                     <li>
                         <a href="/#home"
-                            class="block text-sm py-2 pl-3 pr-4 text-white bg-red-700 rounded md:bg-transparent md:text-papa-merah-200 md:p-0 dark:text-white"
+                            class="block text-sm py-2 pl-3 pr-4  bg-red-700 rounded md:bg-transparent md:text-papa-merah-200 text-gray-700 md:p-0 dark:text-white"
                             aria-current="page">Home</a>
                     </li>
                     <li>
@@ -69,19 +69,19 @@
                     </li>
                     <li>
                         <a href="/menu"
-                        class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Menu</a>
+                            class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Menu</a>
                     </li>
                     <li>
                         <a href="/#mitra"
-                        class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Mitra</a>
+                            class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Mitra</a>
                     </li>
                     <li>
-                    <a href="/#mengapa"
-                        class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Service</a>
+                        <a href="/#mengapa"
+                            class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Service</a>
                     </li>
                     <li>
-                    <a href="/#kontak"
-                        class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                        <a href="/#kontak"
+                            class="block text-sm py-2 pl-3 pr-4 text-gray-700 hover:text-white hover:bg-papa-merah-200 md:text-gray-700 rounded md:hover:bg-gray-100 md:hover:bg-transparent md:hover:text-papa-merah-200 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -95,13 +95,13 @@
         @yield('content')
     </div>
 
-    
+
 
     {{-- footer --}}
-    <footer aria-label="Site Footer" class="bg-gray-100">
+    <footer aria-label="Site Footer" class="bg-gray-100 mt-4">
         <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
             <div class="flex justify-center">
-                <img src="images/logo/logopapajoe.png" alt="logo papajoe's" srcset="">
+                <img src="/images/logo/logopapajoe.png" alt="logo papajoe's" srcset="">
             </div>
 
             <p class="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
@@ -191,6 +191,7 @@
 
     @vite('resources/js/app.js')
     <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 
 </html>
