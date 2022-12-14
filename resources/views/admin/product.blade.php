@@ -14,29 +14,7 @@
                     {{-- !table start --}}
                     <div class="px-4 sm:px-6 lg:px-8">
                         {{-- !validation start --}}
-                        @if ($errors->any())
-                            {{-- refresh kalau ketemu error selama 5 detik --}}
-                            <meta http-equiv="refresh" content="5">
-                            <div
-                                class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800">
-                                <ul class="list-disc px-4">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        {{-- ! validation end --}}
 
-                        {{-- !message start --}}
-                        @if (Session::has('status'))
-                            <meta http-equiv="refresh" content="3">
-                            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
-                                role="alert">
-                                {{ Session::get('message') }}
-                            </div>
-                        @endif
-                        {{-- !message end --}}
 
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
@@ -73,7 +51,7 @@
                                     <button type="submit"
                                         class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                                 </div>
-
+                            </form>
                         </div>
                         {{-- !search end --}}
                         <div class="mt-8 flex flex-col">
@@ -164,19 +142,18 @@
 
                                                         </td>
 
-
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                             @if ($data->kategori == 'halal')
-                                                            <span
-                                                                class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">Halal
-                                                            </span>
-                                                            @else
-                                                            <span
-                                                                class="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-red-800">Non Halal
-                                                            </span>
+                                                                <span
+                                                                    class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">halal
+                                                                </span>
+                                                            @elseif ($data->kategori == 'nonhalal')
+                                                                <span
+                                                                    class="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-red-800">Non Halal
+                                                                </span>
                                                             @endif
-                                                        </td>
 
+                                                        </td>
 
                                                         <td
                                                             class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
@@ -281,7 +258,6 @@
                                 </select>
 
                             </div>
-
                             <div class="mb-6">
 
                                 <label for="kategori"
@@ -296,7 +272,6 @@
                                 </select>
 
                             </div>
-
                             <div class="mb-6">
 
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -393,8 +368,8 @@
 
                                 </div>
 
-                                
                                 <div class="mb-6">
+
                                     <label for="kategori"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategori</label>
                                     <select id="kategori" name="kategori"
@@ -402,15 +377,15 @@
 
                                         <option selected value="{{ $data->kategori }}">
                                             @if ($data->kategori == 'halal')
-                                               Halal
+                                                Halal
                                             @elseif ($data->kategori == 'nonhalal')
-                                                Non Halal
+                                                Halal
                                             @endif
                                         </option>
-                                        <option value="terlaris">Halal</option>
-                                        <option value="aktif">Non Halal</option>
-                                       
+                                        <option value="halal">Halal</option>
+                                        <option value="nonhalal">Non Halal</option>
                                     </select>
+
                                 </div>
 
                                 <div class="mb-6">
@@ -436,5 +411,5 @@
         @endforeach
 
 
-
+    </div>
 </x-app-layout>

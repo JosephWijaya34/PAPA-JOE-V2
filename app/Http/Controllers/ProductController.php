@@ -17,13 +17,13 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-      
 
-        if($request->has('keyword')){
+
+        if ($request->has('keyword')) {
             return view('admin.product', [
-                'product' => Product::where('name','LIKE','%'.$keyword.'%')->orWhere('price','like','%'.$keyword.'%')->orWhere('status','like','%'.$keyword.'%')->paginate(5),
+                'product' => Product::where('name', 'LIKE', '%' . $keyword . '%')->orWhere('price', 'like', '%' . $keyword . '%')->orWhere('status', 'like', '%' . $keyword . '%')->paginate(5),
             ]);
-        }else{
+        } else {
             return view('admin.product', [
                 'product' => Product::paginate(5),
             ]);
@@ -71,6 +71,7 @@ class ProductController extends Controller
                     'price' => $request->price,
                     'description' => $request->description,
                     'status' => $request->status,
+                    'kategori' => $request->kategori,
                     'image' => $file,
                 ]
             );
@@ -92,8 +93,7 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        return view('detail', ['product'=>$product]);
-    
+        return view('detail', ['product' => $product]);
     }
 
     /**
@@ -148,7 +148,7 @@ class ProductController extends Controller
                 'description' => $request->description,
                 'status' => $request->status,
                 'kategori' => $request->kategori,
-              
+
             ]);
         }
 
@@ -190,32 +190,32 @@ class ProductController extends Controller
         return redirect('/product');
     }
 
-    public function menu_user(Request $request){
+    public function menu_user(Request $request)
+    {
         // return view('menu', [
         //     'product' => Product::get()
         // ]);
-
         $keyword = $request->keyword;
+
         if (request()->has('tipe')) {
-            
+            if (request()->input('tipe', 'halal') === 'halal') {
+                $produk = Product::where('kategori', 'LIKE', 'halal')->paginate(5);
+            } else if (request()->input('tipe', 'nonhalal') === 'nonhalal') {
+                $produk = Product::where('kategori', 'LIKE', 'nonhalal')->paginate(5);
+            }
+        } else if ($request->has('keyword')) {
+            $produk = Product::where('name', 'LIKE', '%' . $keyword . '%')->orWhere('price', 'like', '%' . $keyword . '%')->orWhere('status', 'like', '%' . $keyword . '%')->paginate(5);
+        } else {
+            $produk =  Product::paginate(5);
         }
 
-        if($request->has('keyword')){
-            return view('menu', [
-                'product' => Product::where('name','LIKE','%'.$keyword.'%')->orWhere('price','like','%'.$keyword.'%')->orWhere('status','like','%'.$keyword.'%')->paginate(5),
-            ]);
-        }else{
-            return view('menu', [
-                'product' => Product::paginate(5)
-            ]);
-            
-        }
-
-       
-        
+        return view('menu', [
+            'product' => $produk
+        ]);
     }
 
-    public function home_user(){
+    public function home_user()
+    {
         return view('home', [
             'product' => Product::get()
         ]);
