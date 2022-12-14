@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StorePartnerRequest;
 use App\Http\Requests\UpdatePartnerRequest;
+use Illuminate\Validation\Rules\File;
 
 class PartnerController extends Controller
 {
@@ -18,7 +19,7 @@ class PartnerController extends Controller
     public function index()
     {
         return view('admin.mitra',[
-            'partners' => Partner::all(),
+            'partner' => Partner::all(),
         ]);
     }
 
@@ -40,15 +41,15 @@ class PartnerController extends Controller
      */
     public function store(StorePartnerRequest $request)
     {
-        $request->validate([
-            'name' => 'required|max:11',
-            'location' => 'required|max:11|numeric',
-            'description' => 'required|max:100',
-            'phone' => 'required|max:13',
-            'image_partner' => 'required | mimes:jpeg,jpg,png|max:2048',
-        ]);
-
         // dd($request->all());
+        // $request->validate([
+        //     'name' => 'required|max:11',
+        //     'location' => 'required|max:11|numeric',
+        //     'description' => 'required|max:100',
+        //     'phone' => 'required|max:13',
+        //     'image_partner' => 'required | mimes:jpeg,jpg,png|max:2048',
+        // ]);
+
 
         if ($request->file('image_partner') == null) {
             $file = "";
@@ -102,10 +103,43 @@ class PartnerController extends Controller
      * @param  \App\Models\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePartnerRequest $request, Partner $partner)
+    public function update(UpdatePartnerRequest $request, $id)
     {
-        //
+        $partner = Partner::findOrFail($id);
+
+        // dd($product->image);
+
+        if ($request->file('image')) {
+            // hapus foto produk
+            unlink('storage/'.$partner->image_partner);
+            // upload foto produk
+            $file = $request->file('image_partner')->store('mitraphotos', 'public');
+            $partner->update([
+                'name' => $request->name,
+                'location' => $request->location,
+                'description' => $request->description,
+                'phone' => $request->phone,
+                'image_partner' => $file,
+            ]);
+        } else {
+            $partner->update([
+                'name' => $request->name,
+                'location' => $request->location,
+                'description' => $request->description,
+                'phone' => $request->phone,
+            ]);
+        }
+
+
+        if ($partner) {
+            Session::flash('status', 'Success');
+            Session::flash('message', 'Edit product Success');
+        }
+
+
+        return redirect('/mitra');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -113,8 +147,26 @@ class PartnerController extends Controller
      * @param  \App\Models\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Partner $partner)
+    public function destroy($id)
     {
-        //
+        $deletedMitra = Partner::findOrFail($id);
+        // inisialiasi path
+        $path = "public/partnerphotos/$deletedMitra->image_partner";
+
+        // hapus foto produk
+        if ($deletedMitra->image) {
+            if (File::exists($path)){
+                unlink('partnerphotos' . $deletedMitra->image_partner);
+            }
+        }
+        // dd($deletedMitra->image_partner);
+        // hapus data produk
+        $deletedMitra->delete();
+
+        if ($deletedMitra) {
+            Session::flash('status', 'berhasil');
+            Session::flash('message', 'Data berhasil dihapus');
+        }
+        return redirect('/mitra');
     }
 }
