@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
@@ -65,16 +64,6 @@ class ProductController extends Controller
             $file = $request->file('image')->store('productphotos', 'public');
         }
 
-        $product =
-        Product::create(
-            [
-                'name' => $request->name,
-                'price' => $request->price,
-                'description' => $request->description,
-                'status' => $request->status,
-                'image'=>$file,
-            ]
-        );
         $product =
             Product::create(
                 [
@@ -139,7 +128,6 @@ class ProductController extends Controller
         ]);
         // dd($product->image);
 
-
         if ($request->file('image')) {
             // hapus foto produk
             unlink('storage/' . $product->image);
@@ -181,7 +169,7 @@ class ProductController extends Controller
     {
         $deletedProduct = Product::findOrFail($id);
         // inisialiasi path
-        $path = "public/productphotos/$deletedProduct->image";
+        $path = "storage/$deletedProduct->image";
 
         // hapus foto produk
         if ($deletedProduct->image) {
@@ -210,6 +198,4 @@ class ProductController extends Controller
             'product' => Product::get()
         ]);
     }
-
-    }
-
+}

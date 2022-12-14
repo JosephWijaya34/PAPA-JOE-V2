@@ -11,10 +11,7 @@
                 <div class="p-6 text-gray-900">
 
 
-                    {{-- !table start --}}
-                    <div class="px-4 sm:px-6 lg:px-8">
-                        {{-- !validation start --}}
-
+                    
 
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
@@ -238,7 +235,7 @@
                                     <option value="aktif">Aktif</option>
                                     <option value="terlaris">Terlartis</option>
                                     <option value="tidak">Tidak Aktif</option>
-                                    
+
                                 </select>
 
                             </div>
@@ -362,5 +359,5 @@
         @endforeach
 
 
-    </div>
+
 </x-app-layout>

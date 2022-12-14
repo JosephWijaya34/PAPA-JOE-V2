@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Partner;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StorePartnerRequest;
 use App\Http\Requests\UpdatePartnerRequest;
-use Illuminate\Validation\Rules\File;
+
 
 class PartnerController extends Controller
 {
@@ -18,7 +19,7 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        return view('admin.mitra',[
+        return view('admin.mitra', [
             'partner' => Partner::all(),
         ]);
     }
@@ -71,7 +72,6 @@ class PartnerController extends Controller
             Session::flash('message', 'Add new product success');
         }
         return redirect('/mitra');
-
     }
 
     /**
@@ -111,7 +111,7 @@ class PartnerController extends Controller
 
         if ($request->file('image')) {
             // hapus foto produk
-            unlink('storage/'.$partner->image_partner);
+            unlink('storage/' . $partner->image_partner);
             // upload foto produk
             $file = $request->file('image_partner')->store('mitraphotos', 'public');
             $partner->update([
@@ -151,15 +151,16 @@ class PartnerController extends Controller
     {
         $deletedMitra = Partner::findOrFail($id);
         // inisialiasi path
-        $path = "public/partnerphotos/$deletedMitra->image_partner";
+        $path = "storage/$deletedMitra->image_partner";
 
         // hapus foto produk
-        if ($deletedMitra->image) {
-            if (File::exists($path)){
-                unlink('partnerphotos' . $deletedMitra->image_partner);
+        if ($deletedMitra->image_partner) {
+            if (File::exists($path)) {
+                unlink('storage/' . $deletedMitra->image_partner);
             }
         }
-        // dd($deletedMitra->image_partner);
+
+  
         // hapus data produk
         $deletedMitra->delete();
 
