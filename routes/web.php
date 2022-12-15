@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PartnerController;
 use Illuminate\Support\Facades\Route;
@@ -7,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\UserController;
 use App\Models\Product;
 
 /*
@@ -33,6 +35,7 @@ Route::get('/', [HomeController::class, 'home_user'] );
 Route::get('/detail/{id}', [ProductController::class, 'show']);
 Route::get('/mitra/{id}', [PartnerController::class, 'show']);
 Route::get('/menu', [HomeController::class, 'menu_user']);
+
 // home end
 
 
@@ -65,6 +68,7 @@ Route::resource('product', ProductController::class);
 Route::resource('social', SocialMediaController::class);
 Route::resource('mitra', PartnerController::class);
 Route::resource('review', ReviewController::class);
+Route::resource('user', UserController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -89,7 +93,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/social', [SocialMediaController::class, 'index'])->name('socialMenu');
     Route::get('/mitra', [PartnerController::class, 'index'])->name('mitraMenu');
     Route::get('/review', [ReviewController::class, 'index'])->name('reviewMenu');
-    Route::get('/mitra', [PartnerController::class, 'index'])->name('mitraMenu');
+    Route::get('/user', [UserController::class, 'index'])->name('userMenu');
+    // Route::get('/user', [RegisteredUserController::class, 'index'])->name('userMenu');
     // Route::get('/product', [ProductController::class, 'index']);
     // create
     // Route::post('/product', [ProductController::class, 'store']);

@@ -35,3 +35,5 @@ $(selector).on('click', function(){
     $(selector).removeClass('md:text-papa-merah-200 ');
     $(this).addClass('md:text-papa-merah-200');
 });
+
+

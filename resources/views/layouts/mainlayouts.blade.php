@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.2/dist/css/splide.min.css">
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -192,6 +193,17 @@
     @vite('resources/js/app.js')
     <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.2/dist/js/splide.min.js"></script>
+    <script>
+      var splide = new Splide('.splide', {
+        type: 'loop',
+        perPage: 3,
+        rewind: true,
+      });
+
+      splide.mount();
+    </script>
+
 </body>
 
 </html>

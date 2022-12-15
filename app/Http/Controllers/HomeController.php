@@ -5,8 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Partner;
+use App\Models\Review;
 
 class HomeController extends Controller{
+    public function home_user(){
+        return view('home', [
+            'product' => Product::get(),
+            'partner' => Partner::get(),
+            'review' => Review::get()
+        ]);
+    }
+
     public function menu_user(Request $request)
     {
         $keyword = $request->keyword;
@@ -28,10 +37,7 @@ class HomeController extends Controller{
         ]);
     }
 
-    public function home_user(){
-        return view('home', [
-            'product' => Product::get(),
-            'partner' => Partner::get()
-        ]);
-    }
+ 
+
+   
 }
