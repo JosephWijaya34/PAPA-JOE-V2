@@ -19,4 +19,10 @@ class Partner extends Model
         'phone',
         'image_partner'
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_partner', 'id_partner', 'id_product');
+ 
+    }
 }

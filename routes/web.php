@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SocialMediaController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ a.route resource
 // halaman user
 
 // home start
-Route::get('/', [HomeController::class, 'home_user']);
+Route::get('/', [HomeController::class, 'home_user'] );
 Route::get('/detail/{id}', [ProductController::class, 'show']);
 Route::get('/mitra/{id}', [PartnerController::class, 'show']);
 Route::get('/menu', [HomeController::class, 'menu_user']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Partner;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -17,19 +18,14 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->keyword;
-<<<<<<< HEAD
-=======
-
->>>>>>> 882c4669d2b33c363b8d080d16ccff4632aeab02
-
 
         if ($request->has('keyword')) {
             return view('admin.product', [
-                'product' => Product::where('name', 'LIKE', '%' . $keyword . '%')->orWhere('price', 'like', '%' . $keyword . '%')->orWhere('status', 'like', '%' . $keyword . '%')->paginate(5),
+                'product' => Product::with('partners')->where('name', 'LIKE', '%' . $keyword . '%')->orWhere('price', 'like', '%' . $keyword . '%')->orWhere('status', 'like', '%' . $keyword . '%')->paginate(5),
             ]);
         } else {
             return view('admin.product', [
-                'product' => Product::paginate(5),
+                'product' => Product::with('partners')->paginate(5),
             ]);
         }
     }
@@ -41,7 +37,20 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        // //
+        $product = new Product;
+        $product->name = 'sushi';
+        $product->price = 40;
+        $product->description = "mantap";
+        $product->status = "aktif";
+        $product->kategori = "halal";
+        $product->image = "tes.jpg";
+
+       
+        $product->save();
+
+        $partner = Partner::find(1);
+        $product->partners()->attach($partner);
     }
 
     /**
@@ -97,12 +106,7 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-<<<<<<< HEAD
         return view('detail', ['product' => $product]);
-=======
-        return view('detail', ['product'=>$product]);
-
->>>>>>> 882c4669d2b33c363b8d080d16ccff4632aeab02
     }
 
     /**
@@ -161,12 +165,10 @@ class ProductController extends Controller
             ]);
         }
 
-
         if ($product) {
             Session::flash('status', 'Success');
             Session::flash('message', 'Edit product Success');
         }
-
 
         return redirect('/product');
     }
@@ -198,38 +200,8 @@ class ProductController extends Controller
         }
         return redirect('/product');
     }
-<<<<<<< HEAD
 
-    public function menu_user(Request $request)
-    {
-        // return view('menu', [
-        //     'product' => Product::get()
-        // ]);
-        $keyword = $request->keyword;
-
-        if (request()->has('tipe')) {
-            if (request()->input('tipe', 'halal') === 'halal') {
-                $produk = Product::where('kategori', 'LIKE', 'halal')->paginate(5);
-            } else if (request()->input('tipe', 'nonhalal') === 'nonhalal') {
-                $produk = Product::where('kategori', 'LIKE', 'nonhalal')->paginate(5);
-            }
-        } else if ($request->has('keyword')) {
-            $produk = Product::where('name', 'LIKE', '%' . $keyword . '%')->orWhere('price', 'like', '%' . $keyword . '%')->orWhere('status', 'like', '%' . $keyword . '%')->paginate(5);
-        } else {
-            $produk =  Product::paginate(5);
-        }
-
-        return view('menu', [
-            'product' => $produk
-        ]);
-    }
-
-    public function home_user()
-    {
-        return view('home', [
-            'product' => Product::get()
-        ]);
-    }
-=======
->>>>>>> 882c4669d2b33c363b8d080d16ccff4632aeab02
+   
 }
+
+

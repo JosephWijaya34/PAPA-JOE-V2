@@ -20,7 +20,7 @@ class PartnerController extends Controller
     public function index()
     {
         return view('admin.mitra', [
-            'partner' => Partner::all(),
+            'partner' => Partner::get(),
         ]);
     }
 
@@ -82,7 +82,7 @@ class PartnerController extends Controller
      */
     public function show($id)
     {
-        $partner = Partner::findOrFail($id);
+        $partner = Partner::with('products')->findOrFail($id);
         return view('mitra', ['partner'=>$partner]);
     }
 
@@ -170,5 +170,11 @@ class PartnerController extends Controller
             Session::flash('message', 'Data berhasil dihapus');
         }
         return redirect('/mitra');
+    }
+
+    public function home_user(){
+        return view('home', [
+            'partner' => Partner::get()
+        ]);
     }
 }

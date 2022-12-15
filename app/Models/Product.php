@@ -21,5 +21,10 @@ class Product extends Model
         'image'
     ];
 
+    public function partners()
+    {
+        return $this->belongsToMany(Partner::class, 'product_partner', 'id_product', 'id_partner');
+ 
+    }
     
 }

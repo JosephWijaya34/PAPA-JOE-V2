@@ -78,9 +78,8 @@
                             <span class="sr-only">Search</span>
                         </button>
                     </div>
-                </form>
                 </div>
-           
+            </form>
             {{-- Filter dropdown End --}}
             </div>
 
