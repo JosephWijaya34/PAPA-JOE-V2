@@ -48,7 +48,7 @@ class ProductController extends Controller
         $product->kategori = "halal";
         $product->image = "tes.jpg";
 
-       
+
         $product->save();
 
         $partner = Partner::find(1);
@@ -63,6 +63,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->mitra);
         // // validate
         // $request->validate([
         //     'name' => 'required|max:11',
@@ -79,6 +80,7 @@ class ProductController extends Controller
             $file = $request->file('image')->store('productphotos', 'public');
         }
 
+
         $product =
             Product::create(
                 [
@@ -90,9 +92,12 @@ class ProductController extends Controller
                     'image' => $file,
                 ]
             );
+        foreach ($request->mitra as $mitra) {
             // attach data ke table
-            $partner = Partner::find($request->mitra);
+            $partner = Partner::find($mitra);
             $product->partners()->attach($partner);
+        }
+
         if ($product) {
             Session::flash('status', 'Success');
             Session::flash('message', 'Add new product success');
@@ -158,6 +163,10 @@ class ProductController extends Controller
                 'kategori' => $request->kategori,
                 'image' => $file,
             ]);
+            // attach data ke table
+            $id = $request->mitra;
+            $attributes = ['id_partner', $request->mitra];
+            $product->partners()->updateExistingPivot($id, $attributes);
         } else {
             $product->update([
                 'name' => $request->name,
@@ -167,6 +176,10 @@ class ProductController extends Controller
                 'kategori' => $request->kategori,
 
             ]);
+            // attach data ke table
+            $id = $request->mitra;
+            $attributes = ['id_partner', $request->mitra];
+            $product->partners()->updateExistingPivot($id, $attributes);
         }
 
         if ($product) {
@@ -204,8 +217,4 @@ class ProductController extends Controller
         }
         return redirect('/product');
     }
-
-   
 }
-
-

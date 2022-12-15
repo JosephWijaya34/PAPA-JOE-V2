@@ -1,7 +1,7 @@
 {{-- table --}}
 <x-app-layout>
     <x-slot name="header">
-        
+
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Product') }}
         </h2>
@@ -14,27 +14,27 @@
 
                     {{-- !table start --}}
                     <div class="px-4 sm:px-6 lg:px-8">
-                       {{-- !validation start --}}
-                       @if ($errors->any())
-                       <div
-                           class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800">
-                           <ul class="list-disc px-4">
-                               @foreach ($errors->all() as $error)
-                                   <li>{{ $error }}</li>
-                               @endforeach
-                           </ul>
-                       </div>
-                   @endif
-                   {{-- ! validation end --}}
+                        {{-- !validation start --}}
+                        @if ($errors->any())
+                            <div
+                                class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800">
+                                <ul class="list-disc px-4">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        {{-- ! validation end --}}
 
-                   {{-- !message start --}}
-                   @if (Session::has('status'))
-                       <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
-                           role="alert">
-                           {{ Session::get('message') }}
-                       </div>
-                   @endif
-                   {{-- !message end --}} {{-- !validation start --}}
+                        {{-- !message start --}}
+                        @if (Session::has('status'))
+                            <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+                                role="alert">
+                                {{ Session::get('message') }}
+                            </div>
+                        @endif
+                        {{-- !message end --}} {{-- !validation start --}}
 
 
                         <div class="sm:flex sm:items-center">
@@ -173,13 +173,14 @@
                                                                 </span>
                                                             @elseif ($data->kategori == 'nonhalal')
                                                                 <span
-                                                                    class="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-red-800">Non Halal
+                                                                    class="inline-flex rounded-full bg-red-100 px-2 text-xs font-semibold leading-5 text-red-800">Non
+                                                                    Halal
                                                                 </span>
                                                             @endif
 
                                                         </td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                           NAMA MITRA
+                                                            NAMA MITRA
                                                         </td>
 
                                                         <td
@@ -309,24 +310,25 @@
 
                             </div>
 
+                           
+
                             <div class="mb-6">
-
-                                <label for="mitra"
+                                <label for=""
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mitra</label>
-                                <select id="mitra" name="mitra"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Pilih mitra</option>
-                                    @foreach ($partners as $partner)
-                                    <option value="{{ $partner->id }}">{{ $partner->name }}</option>
-                                    @endforeach
-                                   
-                                    
-                          
-                                    
 
-                                </select>
+                                @foreach ($partners as $partner)
+                                    
+                                <div class="flex items-center mb-4">
+                                    <input id="default-checkbox" type="checkbox" value="{{ $partner->id }}" 
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" name="mitra[]">
+                                    <label for="default-checkbox"
+                                        class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $partner->name }}</label>
+                                </div>
+                                
+                                @endforeach
 
                             </div>
+
                             <button data-modal-toggle="staticModal" type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
                             <button data-modal-toggle="staticModal" type="button"
@@ -442,6 +444,30 @@
                                         id="image" name="image" type="file">
 
                                 </div>
+
+                                {{-- {{ $data->partners->id}} --}}
+                                {{-- <div class="mb-6">
+
+                                    <label for="mitra"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mitra</label>
+                                    <select id="mitra" name="mitra"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                        @foreach ($data->partners as $partner)
+                                            <option selected value="{{ $partner->id }}">
+                                                {{ $partner->name }}
+                                            </option>
+                                            @foreach ($partners as $partner)
+                                                <option value="{{ $partner->id }}">{{ $partner->name }}</option>
+                                            @endforeach
+                                        @endforeach
+
+
+                                    </select>
+
+                                </div> --}}
+
+
 
                                 <button data-modal-toggle="editModal{{ $data->id }}" type="submit"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
