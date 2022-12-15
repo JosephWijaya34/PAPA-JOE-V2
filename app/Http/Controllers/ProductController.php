@@ -176,10 +176,33 @@ class ProductController extends Controller
                 'kategori' => $request->kategori,
 
             ]);
+
+            
+            if($request->mitra){
+                foreach ($request->mitra as $mitra) {
+                    $partner = Partner::find($mitra);
+                    if(!$product->partners()->where('id_partner', $mitra)->exists()){
+                        $product->partners()->attach($partner);
+                    }
+    
+                    foreach ($product->partners as $partner) {
+                        if(!in_array($partner->id, $request->mitra)){
+                            $product->partners()->detach($partner->id);
+                        }
+                    }
+    
+                    
+                }
+            } else {
+                foreach ($product->partners as $partner) {
+                    $product->partners()->detach($partner->id);
+                }
+            }
+            
             // attach data ke table
-            $id = $request->mitra;
-            $attributes = ['id_partner', $request->mitra];
-            $product->partners()->updateExistingPivot($id, $attributes);
+            // $id = $request->mitra;
+            // $attributes = ['id_partner', $request->mitra];
+            // $product->partners()->updateExistingPivot($id, $attributes);
         }
 
         if ($product) {
