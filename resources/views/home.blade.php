@@ -4,6 +4,20 @@
 
 
 @section('content')
+    {{-- {{ dd(auth()->user())   }} --}}
+
+    {{-- ! notifikasi start --}}
+
+    {{-- @if (Session::has('status'))
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+            role="alert">
+            {{ Session::get('message') }}
+        </div>
+    @endif --}}
+
+  
+
+    {{-- ! notifikasi end --}}
 
     <div class="mx-auto  p-7 lg:max-w-[1240px]">
         <!-- Hero section hero -->
@@ -357,26 +371,23 @@
         </div>
 
         <div class="splide">
-            <div class="splide__track">
-                <div class="splide__list gap-x-4">
-
-                    @foreach ($review as $review )
-                    @if ($review->status == "yes")
-                    <div class="w-full p-4 shadow splide__slide">
-                        <div class="space-y-2">
-                            <h3 class="text-2xl font-semibold">
-                                {{ $review->user->name }}
-                            </h3>
-                            <p class="text-gray-600">
-                                {{ $review->comment }}
-                            </p>
-                        </div>
-                    </div>
-
-                    @endif
-                    
+            <div class="splide__track p-10">
+                <div class="splide__list gap-x-4 ">
+                    @foreach ($review as $review)
+                        @if ($review->status == 'yes')
+                            <div class="w-full p-4 shadow-lg splide__slide">
+                                <div class="space-y-2">
+                                    <h3 class="text-2xl font-semibold">
+                                        {{ $review->user->name }}
+                                    </h3>
+                                    <p class="text-gray-600">
+                                        {{ $review->comment }}
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
                     @endforeach
-                   
+
                 </div>
             </div>
 
@@ -385,14 +396,15 @@
         {{-- button tambah komen --}}
         <div class="w-full">
             <div class="mx-auto mb-16 text-center flex justify-center mt-4">
+
                 <button
                     class="block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                     type="button" data-modal-toggle="staticModal">
                     Review Papa Joe's
                 </button>
+
             </div>
         </div>
-
 
 
         <!-- Main modal -->
@@ -418,23 +430,28 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <div class="p-6 space-y-6">
+                    <form action="{{ route('home.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="p-6 space-y-6">
 
-                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                            review</label>
-                        <textarea id="message" rows="4"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Write your thoughts here..."></textarea>
+                            <label for="message"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                                review</label>
+                            <textarea id="message" rows="4" name="comment"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Write your thoughts here..."></textarea>
 
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button data-modal-toggle="staticModal" type="button"
-                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                            Send</button>
-                        <button data-modal-toggle="staticModal" type="button"
-                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
-                    </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div
+                            class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button data-modal-toggle="staticModal" type="submit"
+                                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                Send</button>
+                            <button data-modal-toggle="staticModal" type="button"
+                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

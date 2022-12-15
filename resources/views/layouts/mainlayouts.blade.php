@@ -9,6 +9,7 @@
 </head>
 
 <body class="flex flex-col min-h-screen">
+
     {{-- !Header start --}}
     <header
         class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-50 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
@@ -18,32 +19,52 @@
             </a>
             <div class="flex md:order-2">
                 {{-- login button --}}
-                <button type="button"
-                    class="text-white bg-papa-merah-200 hover:bg-papa-merah-100 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-papa-merah-100 dark:hover:bg-papa-merah-200 dark:focus:ring-papa-merah-100 ">Login</button>
+                @guest
+                    <a href="/login"
+                        class="text-white bg-papa-merah-200 hover:bg-papa-merah-100 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-papa-merah-100 dark:hover:bg-papa-merah-200 dark:focus:ring-papa-merah-100 ">Login</a>
+                @endguest
                 {{-- profile button --}}
-                {{-- <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                    <span class="sr-only">Open user menu</span>
-                    <img class="w-10 h-10 rounded-full" src="/images/profile.jpg" alt="user photo">
-                  </button>
-                  <!-- Dropdown menu -->
-                  <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-                    <div class="px-4 py-3">
-                      <span class="block text-sm text-gray-900 dark:text-white">Joseph</span>
-                      <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">joseph@gmail.com</span>
+                @auth
+                    <button type="button"
+                        class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                        id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
+                        data-dropdown-placement="bottom">
+                        <span class="sr-only">Open user menu</span>
+                        <img class="w-10 h-10 rounded-full" src="/images/profile.jpg" alt="user photo">
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                        id="user-dropdown">
+                        <div class="px-4 py-3">
+                            <span class="block text-sm text-gray-900 dark:text-white">{{ Auth::user()->name }}</span>
+                            <span
+                                class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ Auth::user()->email }}</span>
+                        </div>
+                        <ul class="py-1" aria-labelledby="user-menu-button">
+                            <li>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+                            </li>
+
+                            <li>
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button type="submit" class="w-full block text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</button>
+                                </form>
+                            </li>
+                            {{-- <li>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                    out</a>
+                            </li> --}}
+
+                        </ul>
                     </div>
-                    <ul class="py-1" aria-labelledby="user-menu-button">
-                      <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-                      </li>
-                      <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-                      </li>
-                    </ul>
-                  </div> --}}
+                @endauth
                 <button data-collapse-toggle="navbar-sticky" type="button"
                     class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     aria-controls="navbar-sticky" aria-expanded="false">
@@ -55,6 +76,7 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </button>
+
             </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul
@@ -195,14 +217,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.2/dist/js/splide.min.js"></script>
     <script>
-      var splide = new Splide('.splide', {
-        type: 'loop',
-        perPage: 3,
-        rewind: true,
-      });
+        var splide = new Splide('.splide', {
+            type: 'loop',
+            perPage: 3,
+            rewind: true,
+        });
 
-      splide.mount();
+        splide.mount();
     </script>
+   
 
 </body>
 

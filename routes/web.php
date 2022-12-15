@@ -31,10 +31,12 @@ a.route resource
 // halaman user
 
 // home start
-Route::get('/', [HomeController::class, 'home_user'] );
+Route::get('/', [HomeController::class, 'home_user']);
+Route::get('/user/{id}', [PartnerController::class, 'show']);
 Route::get('/detail/{id}', [ProductController::class, 'show']);
 Route::get('/mitra/{id}', [PartnerController::class, 'show']);
 Route::get('/menu', [HomeController::class, 'menu_user']);
+
 
 // home end
 
@@ -68,23 +70,21 @@ Route::resource('product', ProductController::class);
 Route::resource('social', SocialMediaController::class);
 Route::resource('mitra', PartnerController::class);
 Route::resource('review', ReviewController::class);
+Route::resource('home', HomeController::class);
 Route::resource('user', UserController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::resource('product', ProductController::class);
+Route::resource('product', ProductController::class);
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // !product
-
-
-
     // Route::get('/product', [ProductController::class, 'index'])->name('productMenu');
     // Route::get('/social', [SocialMediaController::class, 'index'])->name('socialMenu');
 
@@ -101,8 +101,6 @@ Route::middleware('auth')->group(function () {
 
     // // delete
     // Route::delete('/product-delete/{id}', [ProductController::class, 'destroy']);
-
-
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

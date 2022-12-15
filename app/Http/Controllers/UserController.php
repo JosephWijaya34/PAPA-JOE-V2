@@ -28,7 +28,6 @@ class UserController extends Controller
         return view('admin.user', [
             'users' => User::get()
         ]);
-      
     }
 
     /**
@@ -52,8 +51,8 @@ class UserController extends Controller
         // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'telphone' => ['required', 'string', 'max:14', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'telphone' => ['required', 'string', 'max:14', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -64,7 +63,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-    
+
         return redirect('/user');
     }
 
@@ -99,7 +98,31 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'telphone' => ['required', 'string', 'max:14'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $name = $request->name;
+        $email = $request->email;
+        $telphone = $request->telphone;
+        $password = Hash::make($request->password);
+        $role = $request->role;
+
+        $user->update([
+            'name' => $name,
+            'email' => $email,
+            'telphone' => $telphone,
+            'password' => $password,
+            'role' => $role
+        ]);
+
+        return redirect('/user');
     }
 
     /**
@@ -113,10 +136,10 @@ class UserController extends Controller
         $deletedProduct = User::findOrFail($id);
 
         $user_id = Auth::user()->id;
-        if($id == $user_id){
-        return redirect('/user');
+        if ($id == $user_id) {
+            return redirect('/user');
         }
-      
+
         // hapus data user
         $deletedProduct->delete();
 
