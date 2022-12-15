@@ -22,10 +22,12 @@ class ProductController extends Controller
         if ($request->has('keyword')) {
             return view('admin.product', [
                 'product' => Product::with('partners')->where('name', 'LIKE', '%' . $keyword . '%')->orWhere('price', 'like', '%' . $keyword . '%')->orWhere('status', 'like', '%' . $keyword . '%')->paginate(5),
+                'partners' => Partner::all(),
             ]);
         } else {
             return view('admin.product', [
                 'product' => Product::with('partners')->paginate(5),
+                'partners' => Partner::all(),
             ]);
         }
     }
@@ -61,15 +63,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // validate
-        $request->validate([
-            'name' => 'required|max:11',
-            'price' => 'required|digits_between:2,11|numeric',
-            'description' => 'required|max:100',
-            'image' => 'required | mimes:jpeg,jpg,png|max:2048',
-        ]);
+        // // validate
+        // $request->validate([
+        //     'name' => 'required|max:11',
+        //     'price' => 'required|digits_between:2,11|numeric',
+        //     'description' => 'required|max:100',
+        //     'image' => 'required | mimes:jpeg,jpg,png|max:2048',
+        // ]);
 
-        // dd($request->all());
+        // // dd($request->all());
 
         if ($request->file('image') == null) {
             $file = "";
@@ -88,7 +90,9 @@ class ProductController extends Controller
                     'image' => $file,
                 ]
             );
-
+            // attach data ke table
+            $partner = Partner::find($request->mitra);
+            $product->partners()->attach($partner);
         if ($product) {
             Session::flash('status', 'Success');
             Session::flash('message', 'Add new product success');

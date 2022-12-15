@@ -1,6 +1,7 @@
 {{-- table --}}
 <x-app-layout>
     <x-slot name="header">
+        
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Product') }}
         </h2>
@@ -315,8 +316,10 @@
                                 <select id="mitra" name="mitra"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option selected>Pilih mitra</option>
-                                    
-                                    <option value="aktif">Aktif</option>
+                                    @foreach ($partners as $partner)
+                                    <option value="{{ $partner->id }}">{{ $partner->name }}</option>
+                                    @endforeach
+                                   
                                     
                           
                                     
