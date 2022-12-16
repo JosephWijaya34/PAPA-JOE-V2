@@ -21,6 +21,11 @@ class HomeController extends Controller
     public function index()
     {
         //
+        return view('home', [
+            'product' => Product::get(),
+            'partner' => Partner::get(),
+            'review' => Review::get()
+        ]);
     }
 
     /**
@@ -56,11 +61,12 @@ class HomeController extends Controller
             if ($review) {
                 Session::flash('status', 'success');
                 Session::flash('message', 'Add new review success');
+            } else {
+                Session::flash('status', 'error');
+                Session::flash('message', 'Kamu sudah pernah melakukan review');
             }
-        } else {
-            Session::flash('status', 'error');
-            Session::flash('message', 'Kamu sudah pernah melakukan review');
         }
+
         return redirect('/');
     }
 
@@ -112,11 +118,6 @@ class HomeController extends Controller
 
     public function home_user()
     {
-        return view('home', [
-            'product' => Product::get(),
-            'partner' => Partner::get(),
-            'review' => Review::get()
-        ]);
     }
 
     // menu
@@ -146,7 +147,7 @@ class HomeController extends Controller
     {
         //
         // dd($request->all());
-        
+
         $user_id = Auth::user()->id;
         if (!Review::where('user_id', $user_id)->exists()) {
             $review =
@@ -157,7 +158,7 @@ class HomeController extends Controller
 
                     ]
                 );
-                Alert::success('Success Title', 'Success Message');
+
             if ($review) {
                 Session::flash('status', 'success');
                 Session::flash('message', 'Add new review success');
@@ -165,9 +166,7 @@ class HomeController extends Controller
         } else {
             Session::flash('status', 'error');
             Session::flash('message', 'Kamu sudah pernah melakukan review');
-            Alert::success('Success Title', 'Success Message');
         }
         return redirect('/');
     }
 }
-

@@ -41,7 +41,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         // user yang sedang login
         $user_id = Auth::user()->id;
         

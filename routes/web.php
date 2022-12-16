@@ -31,11 +31,17 @@ a.route resource
 // halaman user
 
 // home start
-Route::get('/', [HomeController::class, 'home_user']);
+Route::get('/', [HomeController::class, 'index']);
+Route::post('/store-review', [HomeController::class, 'store_review_user'])->name('menu-review');
+Route::get('/menu', [HomeController::class, 'menu_user']);
 Route::get('/user/{id}', [PartnerController::class, 'show']);
 Route::get('/detail/{id}', [ProductController::class, 'show']);
 Route::get('/mitra/{id}', [PartnerController::class, 'show']);
-Route::get('/menu', [HomeController::class, 'menu_user']);
+
+// softdelete product
+Route::get('/products-deleted', [ProductController::class, 'deletedProduct']);
+Route::get('/products/{id}/restore',[ProductController::class,'restore']);
+
 
 
 // home end

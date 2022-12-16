@@ -138,7 +138,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+ 
         //
         $product = Product::findOrFail($id);
         // validate
@@ -148,7 +148,6 @@ class ProductController extends Controller
             'description' => 'required|max:100',
             'image' => 'mimes:jpeg,jpg,png|max:2048',
         ]);
-        // dd($product->image);
 
         if ($request->file('image')) {
             // hapus foto produk
@@ -230,15 +229,15 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $deletedProduct = Product::findOrFail($id);
-        // inisialiasi path
-        $path = "storage/$deletedProduct->image";
+        // // inisialiasi path
+        // $path = "storage/$deletedProduct->image";
 
-        // hapus foto produk
-        if ($deletedProduct->image) {
-            if (File::exists($path)) {
-                unlink('storage/' . $deletedProduct->image);
-            }
-        }
+        // // hapus foto produk
+        // if ($deletedProduct->image) {
+        //     if (File::exists($path)) {
+        //         unlink('storage/' . $deletedProduct->image);
+        //     }
+        // }
         // hapus data produk
         $deletedProduct->delete();
 
@@ -248,4 +247,20 @@ class ProductController extends Controller
         }
         return redirect('/product');
     }
+
+    public function deletedProduct()
+    {
+        $product = product::onlyTrashed()->get();
+        return view('admin.product-deleted-list',['products'=> $product]);
+    }
+
+    // soft delete 
+
+    public function restore($id)
+    {
+        $deletedProduct = product::withTrashed()->where('id',$id)->restore();
+        return redirect('/product');
+    }
+
+   
 }
