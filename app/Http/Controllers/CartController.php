@@ -4,19 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
-class TransactionController extends Controller
+class CartController extends Controller
 {
-    /**
+    /**{{  }}
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-public function index()
+    public function index()
     {
         //
-          return view('admin.transaksi',[
+        return view('cart', [
             'transactions' => Transaction::with(['userTransaction','products'])->get(),
         ]);
     }
@@ -39,16 +38,16 @@ public function index()
      */
     public function store(Request $request)
     {
-     
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function show($id)
     {
         //
     }
@@ -56,10 +55,10 @@ public function index()
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit($id)
     {
         //
     }
@@ -68,10 +67,10 @@ public function index()
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Transaction  $transaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -79,13 +78,34 @@ public function index()
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($id)
     {
         //
     }
+    public function redirectBeli(Request $request)
+    {
+        //
 
- 
+        $data = $request->all();
+        $id_product = $dataid_product;
+        $price = $data['price'];
+        $arrayQuantity = $data['quantity'];
+        
+        $temp = 0;
+        foreach($arrayQuantity as $a){
+            $try = $a;
+            $temp += $try;
+        }
+
+        // $newData = json_decode($data['data'], true);
+        return view('beli',[
+            
+            'id_product' => $id_product,
+            'price' => $price,
+            'quantity' => $temp
+        ]);
+    }
 }

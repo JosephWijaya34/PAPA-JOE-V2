@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -39,6 +40,8 @@ Route::get('/menu', [HomeController::class, 'menu_user']);
 Route::get('/user/{id}', [PartnerController::class, 'show']);
 Route::get('/detail/{id}', [ProductController::class, 'show']);
 Route::get('/mitra/{id}', [PartnerController::class, 'show']);
+Route::get('/cart',[CartController::class, 'index']);
+Route::post('/cart-store',[CartController::class, 'redirectBeli'])->name('cart-store');
 
 // softdelete product
 Route::get('/products-deleted', [ProductController::class, 'deletedProduct']);
@@ -52,6 +55,10 @@ Route::get('/products/{id}/forceDelete',[ProductController::class,'forceDelete']
 
 Route::get('/detail', function () {
     return view('detail');
+});
+
+Route::get('/beli', function () {
+    return view('beli');
 });
 
 Route::get('/mitra', function () {
@@ -79,6 +86,7 @@ Route::resource('review', ReviewController::class);
 Route::resource('home', HomeController::class);
 Route::resource('user', UserController::class);
 Route::resource('transaksi', TransactionController::class);
+Route::resource('cart', CartController::class);
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

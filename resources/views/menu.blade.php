@@ -8,18 +8,15 @@
             <div class="p-8 md:p-12 lg:px-16 lg:py-24">
                 <div class="mx-auto max-w-xl text-center sm:text-left">
                     <h2 class="text-2xl font-bold text-gray-900 md:text-3xl">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit
+                        Pilih menu favoritmu dari beragam pilihan dengan harga yang terjangkau !
                     </h2>
 
-                    <p class="hidden text-gray-500 md:mt-4 md:block">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas
-                        tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et
-                        fermentum, augue. Aliquet amet volutpat quisque ut interdum tincidunt
-                        duis.
+                    <p class="hidden text-gray-500 md:mt-4 md:block text-justify">
+                        apakah kamu sedang mencari makanan yang menyajikan menu beragam dengan harga terjangkau? Jika iya, kamu berada di tempat yang tepat! Papa joe’s menyajikan berbagai pilihan menu yang pasti akan memuaskan selera kamu. 
                     </p>
                 </div>
             </div>
-            <img alt="Foto Menu Papajoe" src="/images/tentangpapajoe.png"
+            <img alt= "Foto Menu Papajoe(650 * 310)" src=""
                 class="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-tl-[30px] md:h-[calc(100%_-_4rem)] md:rounded-tl-[60px]" />
         </section>
 

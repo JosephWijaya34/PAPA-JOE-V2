@@ -79,9 +79,7 @@
                         To <span class="text-papa-kuning">Taste</span class="text-papa-kuning"> &<span> Quality</span>.
                     </p>
                     <p class="text-lg mt-5 text-justify md:p-0 md:w-3/4 ">
-                        Kami menyediakan makanan yang sehat, lezat dan bersih. Makanan yang selalu baru
-                        di masak untuk pelanggan
-                        kami.
+                        Rasa dan kualitas selalu menjadi prioritas utama di Papa Joe's. Kami senantiasa berusaha memberikan makanan yang enak dan berkualitas terbaik untuk pelanggan kami.
                     </p>
 
                     <button type="button"
@@ -140,9 +138,7 @@
                 </h2>
 
                 <p class="mt-4 text-gray-50 sm:text-xl">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione dolores
-                    laborum labore provident impedit esse recusandae facere libero harum
-                    sequi.
+                    Kami memiliki beberapa keunggulan yang membuat pelanggan kami puas
                 </p>
             </div>
 
@@ -157,12 +153,10 @@
                             </iconify-icon>
                         </div>
                         <dt class=" text-lg font-medium text-gray-100">
-                            Easy To Order
+                            Pemesanan Yang Mudah
                         </dt>
 
-                        <dd class="text-lg font-light text-gray-100 md:text-lg">simple ordering process and fast
-                            response from
-                            seller.</dd>
+                        <dd class="text-lg font-light text-gray-100 md:text-lg">memesan makanan dengan cukup mudah dan penjual merespon dengan cepat</dd>
                     </div>
 
                     <div class="flex flex-col rounded-lg border border-gray-100 px-4 py-8 text-center shadow-lg">
@@ -171,11 +165,10 @@
                             </iconify-icon>
                         </div>
                         <dt class=" text-lg font-medium text-gray-100">
-                            On Time
+                            Tepat Waktu
                         </dt>
 
-                        <dd class="text-lg font-light text-gray-100 md:text-lg">always providing your food in the right
-                            time.</dd>
+                        <dd class="text-lg font-light text-gray-100 md:text-lg">menyediakan makanan di waktu dan momen yang tepat sesuai dengan pesanan</dd>
                     </div>
 
                     <div class="flex flex-col rounded-lg border border-gray-100 px-4 py-8 text-center shadow-lg">
@@ -185,11 +178,10 @@
                             </iconify-icon>
                         </div>
                         <dt class=" text-lg font-medium text-gray-100">
-                            Best Quality
+                            Kualitas Terbaik
                         </dt>
 
-                        <dd class="text-lg font-light text-gray-100 md:text-lg">providing the best quality ingredients to
-                            make the best quality food</dd>
+                        <dd class="text-lg font-light text-gray-100 md:text-lg">menggunakan bahan makanan yang segar dengan kualitas terbaik untuk membuat makanan dengan kualitas terbaik</dd>
                     </div>
 
                 </dl>
@@ -203,7 +195,7 @@
     <div id="menu" class="mx-auto p-2 lg:mt-10 lg:max-w-[1240px]">
         <div class="flex flex-col justify-center content-center items-center">
             <p class="text-3xl font-bold text-papa-merah-100">Menu Favorit</p>
-            <p class="text-lg text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
+            <p class="text-lg text-gray-500">Menu favorit yang wajib anda coba.</p>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
@@ -321,7 +313,7 @@
                                             </div>
                                         </div>
                                         <div class="grow ml-6">
-                                            <p class="font-bold mb-1 text-white">Email support</p>
+                                            <p class="font-bold mb-1 text-white">Email Bantuan</p>
                                             <p class="text-gray-100">supportpapajoe@gmail.com</p>
                                         </div>
                                     </div>
@@ -341,7 +333,7 @@
                                             </div>
                                         </div>
                                         <div class="grow ml-6">
-                                            <p class="font-bold mb-1 text-white">Location</p>
+                                            <p class="font-bold mb-1 text-white">Lokasi</p>
                                             <p class="text-gray-100">Jl. Darmo Permai Selatan XIII / 6</p>
                                         </div>
                                     </div>
@@ -417,14 +409,14 @@
                 <div class="splide__list gap-x-4 ">
                     @foreach ($review as $review)
                         @if ($review->status == 'yes')
-                            <div class="w-full p-4 shadow-lg splide__slide">
+                            <div class="w-full p-4 shadow-lg splide__slide border border-black-1 rounded-md">
                                 <div class="space-y-2">
-                                    <h3 class="text-2xl font-semibold">
+                                    <h3 class="text-2xl font-bold">
                                         {{ $review->user->name }}
                                     </h3>
-                                    <p class="text-gray-600">
+                                    <p class="text-gray-600 break-all">
                                         {{ $review->comment }}
-                                    </p>
+                                      </p>
                                 </div>
                             </div>
                         @endif

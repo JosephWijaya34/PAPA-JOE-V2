@@ -14,8 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transaction_product', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('transaction_id');
+            // foreign key ke table class id
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('restrict');
+
+            $table->unsignedBigInteger('product_id');
+            // foreign key ke table class id
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict');
+
+            $table->integer('quantity')->nullable(false)->default(1);
         });
     }
 

@@ -27,5 +27,10 @@ class Product extends Model
         return $this->belongsToMany(Partner::class, 'product_partner', 'id_product', 'id_partner');
  
     }
+    // relasi many many 
+    public function transactions()
+    {
+        return $this->belongsToMany(Transaction::class, 'transaction_product', 'product_id', 'transaction_id');
+    }
     
 }

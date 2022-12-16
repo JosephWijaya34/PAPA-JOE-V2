@@ -120,6 +120,7 @@
                                             </thead>
                                             <tbody class="divide-y divide-gray-200 bg-white text-center">
                                                 @foreach ($product as $data)
+                                               
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td
@@ -186,7 +187,12 @@
 
                                                         </td>
                                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                            NAMA MITRA
+                                                            <ul>
+                                                                {{-- @foreach ($data->partners  as $item)
+                                                                <li> - {{ $item->name }}</li>
+                                                                @endforeach --}}
+                                                              
+                                                            </ul>
                                                         </td>
 
                                                         <td

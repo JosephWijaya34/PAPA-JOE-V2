@@ -26,6 +26,10 @@
                 @endguest
                 {{-- profile button --}}
                 @auth
+                    <a href="/cart" class="my-auto flex mr-3">
+                    <iconify-icon icon="material-symbols:add-shopping-cart" width="35" height="35"></iconify-icon>
+                    </a>
+
                     <button type="button"
                         class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                         id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
@@ -129,38 +133,43 @@
             </div>
 
             <p class="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
-                consequuntur amet culpa cum itaque neque.
+                Temukan makanan favorit Anda di sini!
             </p>
 
             <nav aria-label="Footer Nav" class="mt-12">
                 <ul class="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
                     <li>
-                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/">
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/#home">
                             Home
                         </a>
                     </li>
 
                     <li>
-                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/">
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/#tentag">
                             About
                         </a>
                     </li>
 
                     <li>
-                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/">
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/menu">
                             Menu
                         </a>
                     </li>
 
                     <li>
-                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/">
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/#mitra">
+                            Mitra
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/#mengapa">
                             Services
                         </a>
                     </li>
 
                     <li>
-                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/">
+                        <a class="text-gray-700 transition hover:text-papa-merah-200" href="/#kontak">
                             Contact
                         </a>
                     </li>

@@ -9,7 +9,7 @@ class Transaction extends Model
 {
     use HasFactory;
     //inisialisasi nama tabel
-    protected $table = "transaksi";
+    protected $table = "transactions";
 
     // yang boleh diisi
     protected $fillable = [
@@ -19,6 +19,12 @@ class Transaction extends Model
 
     public function userTransaction()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    // relasi many many 
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'transaction_product', 'transaction_id', 'product_id')->withPivot('quantity');
     }
 }
