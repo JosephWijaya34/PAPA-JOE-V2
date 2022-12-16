@@ -90,7 +90,7 @@ class CartController extends Controller
         //
 
         $data = $request->all();
-        $id_product = $dataid_product;
+        $id_product = $data['id_product'];
         $price = $data['price'];
         $arrayQuantity = $data['quantity'];
         
