@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('reviewMenu')" :active="request()->routeIs('reviewMenu')">
                         {{ __('Review') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('transaksiMenu')" :active="request()->routeIs('transaksiMenu')">
+                        {{ __('Transaksi') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('userMenu')" :active="request()->routeIs('userMenu')">
                         {{ __('User') }}
                     </x-nav-link>

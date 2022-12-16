@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Social;
 use App\Models\Partner;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -115,7 +116,10 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        return view('detail', ['product' => $product]);
+        return view('detail', [
+            'products' => $product,
+            'socials' => Social::get(),
+        ]);
     }
 
     /**
@@ -261,6 +265,16 @@ class ProductController extends Controller
         $deletedProduct = product::withTrashed()->where('id',$id)->restore();
         return redirect('/product');
     }
+    // public function forceDelete(Request $request, $id)
+    // {
+    //     $deletedProduct = product::withTrashed()->where('id',$id)->forceDelete();
+    //     // foreach ($request->mitra as $mitra) {
+    //     //     // attach data ke table
+    //     //     $partner = Partner::find($mitra);
+    //     //     $deletedProduct->partners()->attach($partner);
+    //     // }
+    //     return redirect('/product');
+    // }
 
    
 }

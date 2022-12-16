@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PartnerController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialMediaController;
-use App\Http\Controllers\UserController;
-use App\Models\Product;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,14 +43,12 @@ Route::get('/mitra/{id}', [PartnerController::class, 'show']);
 // softdelete product
 Route::get('/products-deleted', [ProductController::class, 'deletedProduct']);
 Route::get('/products/{id}/restore',[ProductController::class,'restore']);
+Route::get('/products/{id}/forceDelete',[ProductController::class,'forceDelete']);
+
 
 
 
 // home end
-
-
-
-
 
 Route::get('/detail', function () {
     return view('detail');
@@ -78,10 +78,11 @@ Route::resource('mitra', PartnerController::class);
 Route::resource('review', ReviewController::class);
 Route::resource('home', HomeController::class);
 Route::resource('user', UserController::class);
+Route::resource('transaksi', TransactionController::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::resource('product', ProductController::class);
 
@@ -100,6 +101,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mitra', [PartnerController::class, 'index'])->name('mitraMenu');
     Route::get('/review', [ReviewController::class, 'index'])->name('reviewMenu');
     Route::get('/user', [UserController::class, 'index'])->name('userMenu');
+    Route::get('/transaksi', [TransactionController::class, 'index'])->name('transaksiMenu');
     // Route::get('/user', [RegisteredUserController::class, 'index'])->name('userMenu');
     // Route::get('/product', [ProductController::class, 'index']);
     // create

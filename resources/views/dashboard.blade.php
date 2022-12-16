@@ -30,10 +30,10 @@
                         </div>
                         <dl class="text-right">
                             <dt class="text-2xl font-semibold">
-                                36
+                               {{ $products }}
                             </dt>
                             <dd class="uppercase font-medium text-sm text-gray-500 tracking-wider">
-                                Sales
+                                Total Produk
                             </dd>
                         </dl>
                     </div>

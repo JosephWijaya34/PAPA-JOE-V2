@@ -166,7 +166,11 @@
                                                         <a href="/products/{{$product->id}}/restore"
                                                             class="text-indigo-600 hover:text-indigo-900">Restore
                                                         </a>
-                                                        
+{{--                                                         
+                                                        <a href="/products/{{$product->id}}/restore"
+                                                            class="text-indigo-600 hover:text-indigo-900">Restore
+                                                        </a>
+                                                         --}}
                                                      
                                                        
 
