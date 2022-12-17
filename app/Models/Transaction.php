@@ -12,9 +12,11 @@ class Transaction extends Model
     protected $table = "transactions";
 
     // yang boleh diisi
+    
     protected $fillable = [
         'payment_photo',
         'status',
+        'user_id'
     ];
 
     public function userTransaction()

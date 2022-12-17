@@ -89,23 +89,21 @@ class CartController extends Controller
     {
         //
 
-        $data = $request->all();
-        $id_product = $data['id_product'];
-        $price = $data['price'];
-        $arrayQuantity = $data['quantity'];
+        // $data = $request->all();
+        // $id_product = $data['id_product'];
+        // $price = $data['price'];
+        // $arrayQuantity = $data['quantity'];
         
-        $temp = 0;
-        foreach($arrayQuantity as $a){
-            $try = $a;
-            $temp += $try;
-        }
+        // $temp = 0;
+        // foreach($arrayQuantity as $a){
+        //     $try = $a;
+        //     $temp += $try;
+        // }
 
         // $newData = json_decode($data['data'], true);
         return view('beli',[
             
-            'id_product' => $id_product,
-            'price' => $price,
-            'quantity' => $temp
+           
         ]);
     }
 }

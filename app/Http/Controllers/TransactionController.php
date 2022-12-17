@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class TransactionController extends Controller
@@ -85,6 +86,21 @@ public function index()
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+
+
+    public function insertDataCart(Request $request){
+        $user_id = Auth::user()->id;
+        $cart =
+        Transaction::create(
+            [
+                'payment_photo' => $request->name,
+                'status' => $request->price,
+                'user_id' => $user_id,
+            ]
+            
+        );
     }
 
  

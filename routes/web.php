@@ -35,6 +35,7 @@ a.route resource
 
 // home start
 Route::get('/', [HomeController::class, 'index']);
+Route::post('/changepwd/{id}', [UserController::class, 'changePassword'])->name('changePassword');
 Route::post('/store-review', [HomeController::class, 'store_review_user'])->name('menu-review');
 Route::get('/menu', [HomeController::class, 'menu_user']);
 Route::get('/user/{id}', [PartnerController::class, 'show']);

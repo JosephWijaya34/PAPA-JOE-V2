@@ -93,10 +93,13 @@ class ProductController extends Controller
                     'image' => $file,
                 ]
             );
-        foreach ($request->mitra as $mitra) {
-            // attach data ke table
-            $partner = Partner::find($mitra);
-            $product->partners()->attach($partner);
+
+        if ($request->mitra != null) {
+            foreach ($request->mitra as $mitra) {
+                // attach data ke table
+                $partner = Partner::find($mitra);
+                $product->partners()->attach($partner);
+            }
         }
 
         if ($product) {
@@ -142,7 +145,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
- 
+
         //
         $product = Product::findOrFail($id);
         // validate
@@ -255,14 +258,14 @@ class ProductController extends Controller
     public function deletedProduct()
     {
         $product = product::onlyTrashed()->get();
-        return view('admin.product-deleted-list',['products'=> $product]);
+        return view('admin.product-deleted-list', ['products' => $product]);
     }
 
     // soft delete 
 
     public function restore($id)
     {
-        $deletedProduct = product::withTrashed()->where('id',$id)->restore();
+        $deletedProduct = product::withTrashed()->where('id', $id)->restore();
         return redirect('/product');
     }
     // public function forceDelete(Request $request, $id)
@@ -276,5 +279,5 @@ class ProductController extends Controller
     //     return redirect('/product');
     // }
 
-   
+
 }

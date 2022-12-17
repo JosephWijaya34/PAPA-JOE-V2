@@ -133,7 +133,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $deletedProduct = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
         $user_id = Auth::user()->id;
         if ($id == $user_id) {
@@ -141,12 +141,65 @@ class UserController extends Controller
         }
 
         // hapus data user
-        $deletedProduct->delete();
+        $user->delete();
 
         // if ($deletedProduct) {
         //     Session::flash('status', 'success');
         //     Session::flash('message', 'Delete product success');
         // }
         return redirect('/user');
+    }
+
+    /**
+     * 
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(Request $request, $id){
+
+// dd($request->all());
+        // $user = User::findOrFail($id);
+
+        // $request->validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255'],
+        //     'telphone' => ['required', 'string', 'max:14'],
+        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        // ]);
+
+        // $name = $request->name;
+        // $email = $request->email;
+        // $telphone = $request->telphone;
+        // $password = Hash::make($request->password);
+        // $role = $request->role;
+
+        // $user->update([
+        //     'name' => $name,
+        //     'email' => $email,
+        //     'telphone' => $telphone,
+        //     'password' => $password,
+        //     'role' => $role
+        // ]);
+
+        // return redirect('/user');
+
+      
+
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+
+        $password = Hash::make($request->password);
+
+        $user->update([
+            'password' => $password
+        ]);
+
+        return redirect('/');
     }
 }
