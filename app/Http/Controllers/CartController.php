@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Models\TransactionProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ class CartController extends Controller
     {
         //
         return view('cart', [
-            'transactions' => Transaction::with(['userTransaction', 'products'])->get(),
+            'transactions' => Transaction::with(['userTransaction', 'products'])->distinct()->get(),
         ]);
     }
 
@@ -97,21 +98,37 @@ class CartController extends Controller
     {
 
         // dd(request()->all());
+        $cart = Transaction::where('user_id', Auth::user()->id)->where('status', 'cart')->exists();
+        $product = TransactionProduct::where('product_id', $request->product_id)->exists();
 
-        $transaction =
-            Transaction::create(
-                [
-                    'user_id' => Auth::user()->id,
-                    'payment_photo' => $request->price,
-                    'description' => $request->description,
-                    'status' => $request->status,
-                ]
-            );
+        if ($cart && $product) {
+            $cart = Transaction::where('user_id', Auth::user()->id)->where('status', 'cart')->firstOrFail();
+            $cart->products()->updateExistingPivot($request->product_id, ['quantity' => $request->quantity]);
+        } else {
+            if ($cart) {
+                $cart = Transaction::with('products')->where('user_id', Auth::user()->id)->where('status', 'cart')->first();
+                $cart->products()->attach($request->product_id, ['quantity' => $request->quantity]);
+            } else {
+                $cart =
+                    Transaction::create(
+                        [
+                            'user_id' => Auth::user()->id,
+                            'payment_photo' => null,
+                            'description' => $request->description,
+                            'status' => $request->status,
+                        ]
+                    );
+                $product_id = Product::find($request->product_id);
+                $cart->products()->attach($product_id, ['quantity' => $request->quantity]);
+            }
+        }
+        // $cart = Transaction::with('products')->where('user_id', Auth::user()->id)->where('status', 'cart')->first();
+        // $cart->products()->attach($request->product_id, ['quantity' => 1]);
 
 
-        // attach data ke table
-        $product_id = Product::find($request->product_id);
-        $transaction->products()->attach($product_id);
+
+        // // attach data ke table
+
         return redirect('/cart');
     }
     // transaction
@@ -121,6 +138,7 @@ class CartController extends Controller
         return view('beli', [
             'totalHarga' => $request->totalHarga,
             'transactions' => Transaction::with(['userTransaction', 'products'])->get(),
+
         ]);
     }
 
@@ -128,17 +146,15 @@ class CartController extends Controller
     public function paymentProses(Request $request)
     {
         //
-        
         foreach ($request->idTransaction as $id) {
             $payment = Transaction::findOrFail($id);
-            if($payment->status == 'cart'){
+            if ($payment->status == 'cart') {
                 $payment->update([
                     'payment_photo' => $request->facebook,
                     'status' => "pending",
                 ]);
             }
         }
-        
         return redirect('/home');
     }
 }
