@@ -90,18 +90,19 @@ public function index()
 
 
 
-    public function insertDataCart(Request $request){
-        $user_id = Auth::user()->id;
-        $cart =
-        Transaction::create(
-            [
-                'payment_photo' => $request->name,
-                'status' => $request->price,
-                'user_id' => $user_id,
-            ]
+
+    // public function insertDataCart(Request $request){
+    //     $user_id = Auth::user()->id;
+    //     $cart =
+    //     Transaction::create(
+    //         [
+    //             'payment_photo' => $request->name,
+    //             'status' => $request->price,
+    //             'user_id' => $user_id,
+    //         ]
             
-        );
-    }
+    //     );
+    // }
 
  
 }

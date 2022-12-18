@@ -13,6 +13,7 @@ use App\Http\Controllers\SocialMediaController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransactionController;
+use App\Models\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,8 +42,14 @@ Route::get('/menu', [HomeController::class, 'menu_user']);
 Route::get('/user/{id}', [PartnerController::class, 'show']);
 Route::get('/detail/{id}', [ProductController::class, 'show']);
 Route::get('/mitra/{id}', [PartnerController::class, 'show']);
+// cart
 Route::get('/cart',[CartController::class, 'index']);
-Route::post('/cart-store',[CartController::class, 'redirectBeli'])->name('cart-store');
+Route::post('/cart-store',[CartController::class, 'redirectCart'])->name('cart-store');
+Route::get('/cart-delete/{id}',[CartController::class, 'destroy'])->name('cart-delete');
+// transaction
+Route::post('/cart-redirect',[CartController::class, 'showDetailPayment'])->name('cart-redirect');
+// Route::post('/cart-payment/{id}',[CartController::class, 'paymentProses'])->name('cart-payment');
+Route::post('/cart-payment',[CartController::class, 'paymentProses'])->name('cart-payment');
 
 // softdelete product
 Route::get('/products-deleted', [ProductController::class, 'deletedProduct']);

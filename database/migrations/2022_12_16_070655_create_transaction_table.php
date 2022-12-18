@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_photo');
+            $table->string('payment_photo')->nullable("true");
             $table->string('status');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();

@@ -58,6 +58,7 @@
 
     {{-- ! notifikasi end --}}
 
+    
     <div class="mx-auto  p-7 lg:max-w-[1240px]">
         <!-- Hero section hero -->
         <section>
