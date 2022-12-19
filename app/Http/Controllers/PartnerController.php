@@ -43,13 +43,13 @@ class PartnerController extends Controller
     public function store(StorePartnerRequest $request)
     {
         // dd($request->all());
-        // $request->validate([
-        //     'name' => 'required|max:11',
-        //     'location' => 'required|max:11|numeric',
-        //     'description' => 'required|max:100',
-        //     'phone' => 'required|max:13',
-        //     'image_partner' => 'required | mimes:jpeg,jpg,png|max:2048',
-        // ]);
+        $request->validate([
+            'name' => 'required|max:11',
+            'location' => 'required',
+            'description' => 'required|max:100',
+            'phone' => 'required|max:13',
+            'image_partner' => 'required | mimes:jpeg,jpg,png|max:2048',
+        ]);
 
 
         if ($request->file('image_partner') == null) {

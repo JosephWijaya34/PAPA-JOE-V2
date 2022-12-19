@@ -19,7 +19,7 @@ class CartController extends Controller
     {
         //
         return view('cart', [
-            'transactions' => Transaction::with(['userTransaction', 'products'])->distinct()->get(),
+            'transactions' => Transaction::with(['userTransaction', 'products'])->get(),
         ]);
     }
 
@@ -87,8 +87,12 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
-        $deletedCart = Transaction::findOrFail($id);
-        $deletedCart->delete();
+        $deletedCart = Product::findOrFail($id);
+        $cekTransaksi = Transaction::where("user_id", Auth::user()->id)->get()->toArray()[0]["id"];
+        $deletedCart->transactions()->detach($cekTransaksi);
+
+        // $deletedCart->delete();
+
 
         return redirect('/cart');
     }
@@ -97,19 +101,39 @@ class CartController extends Controller
     public function redirectCart(Request $request)
     {
 
-        // dd(request()->all());
-        $cart = Transaction::where('user_id', Auth::user()->id)->where('status', 'cart')->exists();
-        $product = TransactionProduct::where('product_id', $request->product_id)->exists();
+        // DB::table('transaction_product')->where('')
 
-        if ($cart && $product) {
-            $cart = Transaction::where('user_id', Auth::user()->id)->where('status', 'cart')->firstOrFail();
-            $cart->products()->updateExistingPivot($request->product_id, ['quantity' => $request->quantity]);
-        } else {
-            if ($cart) {
-                $cart = Transaction::with('products')->where('user_id', Auth::user()->id)->where('status', 'cart')->first();
-                $cart->products()->attach($request->product_id, ['quantity' => $request->quantity]);
-            } else {
-                $cart =
+
+        $cart = Transaction::where('user_id', Auth::user()->id)->where('status', 'cart')->exists();
+
+        if($cart){
+            $cekTransaksi = Transaction::where("user_id", Auth::user()->id)->where('status', 'cart')->get()->toArray()[0]["id"];
+            $product = TransactionProduct::where('transaction_id', $cekTransaksi)->where("product_id", $request->product_id)->exists();
+
+            if($product){
+                $getProdukrelate = TransactionProduct::where('transaction_id', $cekTransaksi)->where("product_id", $request->product_id)->get();
+                // nambah kuantitas produk itu
+                $x = 0;
+            foreach ($getProdukrelate as $products) {
+                $x = $x + $products->quantity;
+            }
+            $newquantity = $x + $request->quantity;
+            $cart = Transaction::with('products')->where('user_id', Auth::user()->id)->where('status', 'cart')->first();
+            $cart->products()->updateExistingPivot($request->product_id, ['quantity' => $newquantity]);
+            }else{
+                // buat produk baru
+                $transactionId = Transaction::where("user_id", Auth::user()->id)->get()->toArray()[0]["id"];
+                TransactionProduct::create(
+                    [
+                        'transaction_id' => $transactionId,
+                        'product_id' => $request->product_id,
+                        'quantity' => $request->quantity,
+
+                    ]);
+            }
+        }else{
+            // buat cart baru
+            $cart =
                     Transaction::create(
                         [
                             'user_id' => Auth::user()->id,
@@ -120,21 +144,16 @@ class CartController extends Controller
                     );
                 $product_id = Product::find($request->product_id);
                 $cart->products()->attach($product_id, ['quantity' => $request->quantity]);
-            }
         }
-        // $cart = Transaction::with('products')->where('user_id', Auth::user()->id)->where('status', 'cart')->first();
-        // $cart->products()->attach($request->product_id, ['quantity' => 1]);
-
-
-
-        // // attach data ke table
 
         return redirect('/cart');
     }
+
+
     // transaction
     public function showDetailPayment(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         return view('beli', [
             'totalHarga' => $request->totalHarga,
             'transactions' => Transaction::with(['userTransaction', 'products'])->get(),
@@ -146,12 +165,18 @@ class CartController extends Controller
     public function paymentProses(Request $request)
     {
         //
+        //  dd($request->all());
+        if ($request->file('image') == null) {
+            $file = "";
+        } else {
+            $file = $request->file('image')->store('paymentphotos', 'public');
+        }
         foreach ($request->idTransaction as $id) {
             $payment = Transaction::findOrFail($id);
             if ($payment->status == 'cart') {
                 $payment->update([
-                    'payment_photo' => $request->facebook,
-                    'status' => "pending",
+                    'status' => "paid",
+                    'payment_photo' => $file,
                 ]);
             }
         }

@@ -56,6 +56,8 @@ Route::get('/products-deleted', [ProductController::class, 'deletedProduct']);
 Route::get('/products/{id}/restore',[ProductController::class,'restore']);
 Route::get('/products/{id}/forceDelete',[ProductController::class,'forceDelete']);
 
+// history
+Route::get('/history', [TransactionController::class, 'history']);
 
 
 

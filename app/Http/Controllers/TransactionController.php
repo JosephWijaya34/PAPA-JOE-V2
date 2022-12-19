@@ -14,11 +14,11 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-public function index()
+    public function index()
     {
         //
-          return view('admin.transaksi',[
-            'transactions' => Transaction::with(['userTransaction','products'])->get(),
+        return view('admin.transaksi', [
+            'transactions' => Transaction::with(['userTransaction', 'products'])->get(),
         ]);
     }
 
@@ -40,7 +40,6 @@ public function index()
      */
     public function store(Request $request)
     {
-     
     }
 
     /**
@@ -72,9 +71,20 @@ public function index()
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $id)
     {
-        //
+        // //
+        $transaction = Transaction::findOrFail($id);
+
+        $transaction->update([
+            'status' => $request->status,
+        ]);
+        if ($transaction) {
+            Session::flash('status', 'Success');
+            Session::flash('message', 'Edit transaction Success');
+        }
+        return redirect('/transaksi');
+
     }
 
     /**
@@ -89,6 +99,13 @@ public function index()
     }
 
 
+    public function history()
+    {
+        //
+        return view('history', [
+            'transactions' => Transaction::with(['userTransaction', 'products'])->get(),
+        ]);
+    }
 
 
     // public function insertDataCart(Request $request){
@@ -100,9 +117,9 @@ public function index()
     //             'status' => $request->price,
     //             'user_id' => $user_id,
     //         ]
-            
+
     //     );
     // }
 
- 
+
 }
