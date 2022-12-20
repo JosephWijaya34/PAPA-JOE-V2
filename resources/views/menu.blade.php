@@ -16,7 +16,7 @@
                     </p>
                 </div>
             </div>
-            <img alt= "Foto Menu Papajoe(650 * 310)" src=""
+            <img alt= "Foto Menu Papajoe(650 * 310)" src="/images/tentangpapajoe.png"
                 class="h-full w-full object-cover sm:h-[calc(100%_-_2rem)] sm:self-end sm:rounded-tl-[30px] md:h-[calc(100%_-_4rem)] md:rounded-tl-[60px]" />
         </section>
 
@@ -24,7 +24,7 @@
         <section class="mt-20">
             <div class="flex flex-col justify-center items-center">
                 <p class="text-3xl font-bold text-papa-merah-100">Menu</p>
-                <p class="text-lg text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.
+                <p class="text-lg text-gray-500">Pilhan produk yang disediakan PAPA JOE'S
                 </p>
 
                 
@@ -50,11 +50,15 @@
                         style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(897px, 5637px, 0px);">
                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
                             <li>
-                                <button name="tipe" value="halal"
-                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pork</button>
+                                <button name="tipe" value="semua"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Semua</button>
                             </li>
                             <li>
                                 <button name="tipe" value="nonhalal"
+                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pork</button>
+                            </li>
+                            <li>
+                                <button name="tipe" value="halal"
                                     class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">No
                                     Pork</button>
                             </li>
@@ -94,7 +98,7 @@
                             <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white md:text-2xl">
                                 {{ $data->name }}</h5>
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-xs md:text-lg">{{ $data->description }}</p>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-xs md:text-lg truncate">{{ $data->description }}</p>
                             <div class="mx-auto text-center">
                                 <a href="/detail/{{ $data->id }}"
                                     class="inline-flex items-center px-7 md:px-10 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-papa-merah-100 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-papa-merah-100">
@@ -111,6 +115,9 @@
                 </div>
 
                 @endforeach
+            </div>
+            <div class="p-9">
+                {{ $product->links() }}
             </div>
             {{-- !menu end --}}
         </section>

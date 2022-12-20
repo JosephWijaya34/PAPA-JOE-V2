@@ -28,7 +28,7 @@
 
 
                             </div>
-
+                           
 
                             <div class="mt-8 flex flex-col">
                                 <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -129,10 +129,10 @@
                                                             <td
                                                                 class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-24">
                                                                 <p class="text-gray-900">
-                                                               
-                                                                    <?php $totalHarga = 0;  ?>
+
+                                                                    <?php $totalHarga = 0; ?>
                                                                     @foreach ($transaction->products as $product)
-                                                                        <?php 
+                                                                        <?php
                                                                         
                                                                         $totalHarga += $product->price * $product->pivot->quantity; ?>
                                                                     @endforeach
@@ -282,8 +282,9 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bukti Pembayaran
 
                             </label>
-                            <img src="{{ asset('storage/' . $transaction->payment_photo) }}" alt="" class=" h-72 rounded-md">
-                           
+                            <img src="{{ asset('storage/' . $transaction->payment_photo) }}" alt=""
+                                class=" h-72 rounded-md">
+
                         </div>
 
 

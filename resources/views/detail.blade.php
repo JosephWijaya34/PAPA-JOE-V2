@@ -5,7 +5,7 @@
 
     <div class="container mx-auto px-5 py-5">
         <div class="ml-10 mb-5 mr-10 my-auto">
-            <a href="/"><button class="hover:text-red-500 rounded font-bold text-lg">
+            <a href="/menu"><button class="hover:text-red-500 rounded font-bold text-lg">
                     <iconify-icon icon="material-symbols:arrow-back-ios-rounded"></iconify-icon> Kembali
                 </button></a>
         </div>
@@ -22,9 +22,10 @@
                 <div class="flex mt-5">
 
                     @guest
+                    
 
                         <div class="">
-                            <a href="https://api.whatsapp.com/send?phone={{ $socials[0]['social'] }}&text=Halo,%20saya%20ingin%20bertanya%20seputar%20produk%20{{ $products->name }}"
+                            <a href="https://api.whatsapp.com/send?phone=62{{ $socials[0]['whatsapp']}}&text=Halo,%20saya%20ingin%20bertanya%20seputar%20produk%20{{ $products->name }}"
                                 target="_blank"
                                 class="bg-green-500 hover:bg-green-800 px-10 py-2 rounded-md text-center text-white">Beli</a>
                         </div>

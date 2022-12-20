@@ -23,7 +23,7 @@
     <div class="mx-auto p-2 lg:mt-10 lg:max-w-[1240px]">
         <div class="grid grid-cols-2">
             <div class="p-5">
-                <img class="rounded-xl shadow-lg" src="/images/mitra/hokky.png" alt="foto logo">
+                <img class="rounded-xl shadow-lg" src="{{ asset('storage/' . $partner->image_partner) }}" alt="foto logo">
             </div>
             <div class="p-5">
                 <h1 class="text-2xl font-semibold">{{ $partner->name }}</h1>

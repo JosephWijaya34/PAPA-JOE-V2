@@ -14,12 +14,25 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        // dd($request);
         return view('admin.transaksi', [
             'transactions' => Transaction::with(['userTransaction', 'products'])->get(),
         ]);
+        // $keyword = $request->keyword;
+
+        // if ($request->has('keyword')) {
+        //     return view('admin.transaksi', [
+        //         'transactions' => Transaction::with(['userTransaction', 'products'])->where('status', 'LIKE', '%' . $keyword . '%'),
+                
+        //     ]);
+        // } else {
+        //     return view('admin.transaksi', [
+        //             'transactions' => Transaction::with(['userTransaction', 'products'])->get(),
+        //     ]);
+        // }
     }
 
     /**

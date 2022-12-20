@@ -66,12 +66,12 @@ class ProductController extends Controller
     {
         // dd($request->mitra);
         // // validate
-        // $request->validate([
-        //     'name' => 'required|max:11',
-        //     'price' => 'required|digits_between:2,11|numeric',
-        //     'description' => 'required|max:100',
-        //     'image' => 'required | mimes:jpeg,jpg,png|max:2048',
-        // ]);
+        $request->validate([
+            'name' => 'required|',
+            'price' => 'required|digits_between:2,11|numeric',
+            'description' => 'required|max:100',
+            'image' => 'required | mimes:jpeg,jpg,png|max:2048',
+        ]);
 
         // // dd($request->all());
 
@@ -150,7 +150,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         // validate
         $request->validate([
-            'name' => 'required|max:11',
+            'name' => 'required',
             'price' => 'required|digits_between:2,11|numeric',
             'description' => 'required|max:100',
             'image' => 'mimes:jpeg,jpg,png|max:2048',
@@ -236,16 +236,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $deletedProduct = Product::findOrFail($id);
-        // // inisialiasi path
-        // $path = "storage/$deletedProduct->image";
-
-        // // hapus foto produk
-        // if ($deletedProduct->image) {
-        //     if (File::exists($path)) {
-        //         unlink('storage/' . $deletedProduct->image);
-        //     }
-        // }
-        // hapus data produk
         $deletedProduct->delete();
 
         if ($deletedProduct) {

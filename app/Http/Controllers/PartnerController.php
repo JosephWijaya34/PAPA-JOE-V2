@@ -44,7 +44,7 @@ class PartnerController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'name' => 'required|max:11',
+            'name' => 'required|max:50',
             'location' => 'required',
             'description' => 'required|max:100',
             'phone' => 'required|max:13',

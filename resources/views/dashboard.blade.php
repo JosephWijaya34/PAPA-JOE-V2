@@ -41,7 +41,7 @@
                 </div>
                 <!-- END Card: Simple Widget with Icon -->
 
-                <!-- Card: Simple Widget with Icon -->
+                {{-- <!-- Card: Simple Widget with Icon -->
                 <div class="flex flex-col rounded shadow-sm bg-white overflow-hidden">
                     <!-- Card Body: Simple Widget with Icon -->
                     <div class="p-5 lg:p-6 grow w-full flex justify-between items-center">
@@ -90,7 +90,7 @@
                     </div>
                     <!-- END Card Body: Simple Widget with Icon -->
                 </div>
-                <!-- END Card: Simple Widget with Icon -->
+                <!-- END Card: Simple Widget with Icon --> --}}
             </div>
             <!-- END Simple Statistics with Icons Grid -->
             {{-- ! card end --}}

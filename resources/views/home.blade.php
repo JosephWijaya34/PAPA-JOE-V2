@@ -83,13 +83,13 @@
                         Rasa dan kualitas selalu menjadi prioritas utama di Papa Joe's. Kami senantiasa berusaha memberikan makanan yang enak dan berkualitas terbaik untuk pelanggan kami.
                     </p>
 
-                    <button type="button"
+                    <a type="button" href="https://api.whatsapp.com/send?phone=62{{ $socials[0]['whatsapp']}}&text=Halo,%20saya%20ingin%20bertanya%20seputar%20produk%20papajoe's" target="_blank"
                         class="  duration-400 text-white  mt-4 w-[140px] py-[10px] px-7 bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-md text-smtext-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Contact
-                        Us</button>
+                        Us</a>
 
-                    <button type="button"
+                    <a href="/menu" type="button"
                         class="transition duration-400 text-gray-900 mt-4 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Our
-                        Menu</button>
+                        Menu</a>
 
                 </div>
 
@@ -112,11 +112,8 @@
                     {{-- kiri --}}
                     <div class='my-auto flex flex-col justify-center font-lato'>
                         <p class='font-bold text-3xl'>Tentang PAPA JOE'S</p>
-                        <p class='text-lg max-w-md mt-4 text-justify'>Lorem ipsum, dolor sit amet consectetur adipisicing
-                            elit. Culpa
-                            doloremque aperiam reiciendis quam vel deleniti, dolorum enim porro, exercitationem odit
-                            voluptates
-                            dignissimos? Eaque eligendi eveniet illo nulla quia. Non, esse?</p>
+                        <p class='text-lg max-w-md mt-4 text-justify'>
+                            PAPA JOE'S adalah sebuah usaha di industri makanan & minuman yang menawarkan berbagai jenis makanan. Mulai dari masakan Indonesia, Cina, dan Barat.</p>
                     </div>
 
                     {{-- kanan --}}
@@ -216,7 +213,7 @@
                                     class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white md:text-2xl">
                                     {{ $data->name }}</h5>
                             </a>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-xs md:text-lg">
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-xs md:text-lg truncate">
                                 {{ $data->description }}</p>
                             <div class="mx-auto text-center">
                                 <a href="/detail/{{ $data->id }}"

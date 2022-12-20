@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\Social;
 use App\Models\Partner;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -24,7 +25,8 @@ class HomeController extends Controller
         return view('home', [
             'product' => Product::get(),
             'partner' => Partner::get(),
-            'review' => Review::get()
+            'review' => Review::get(),
+            'socials' => Social::get()
         ]);
     }
 
@@ -127,14 +129,16 @@ class HomeController extends Controller
 
         if (request()->has('tipe')) {
             if (request()->input('tipe', 'halal') === 'halal') {
-                $produk = Product::where('kategori', 'LIKE', 'halal')->paginate(5);
+                $produk = Product::where('kategori', 'LIKE', 'halal')->paginate(6);
             } else if (request()->input('tipe', 'nonhalal') === 'nonhalal') {
-                $produk = Product::where('kategori', 'LIKE', 'nonhalal')->paginate(5);
+                $produk = Product::where('kategori', 'LIKE', 'nonhalal')->paginate(6);
+            } else if (request()->input('tipe', 'semua') === 'semua') {
+                $produk = Product::paginate(6);
             }
         } else if ($request->has('keyword')) {
-            $produk = Product::where('name', 'LIKE', '%' . $keyword . '%')->orWhere('price', 'like', '%' . $keyword . '%')->orWhere('status', 'like', '%' . $keyword . '%')->paginate(5);
+            $produk = Product::where('name', 'LIKE', '%' . $keyword . '%')->orWhere('price', 'like', '%' . $keyword . '%')->orWhere('status', 'like', '%' . $keyword . '%')->paginate(6);
         } else {
-            $produk =  Product::paginate(5);
+            $produk =  Product::paginate(6);
         }
 
         return view('menu', [

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Product;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -10,10 +10,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SocialMediaController;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransactionController;
-use App\Models\Transaction;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,18 +42,14 @@ Route::get('/user/{id}', [PartnerController::class, 'show']);
 Route::get('/detail/{id}', [ProductController::class, 'show']);
 Route::get('/mitra/{id}', [PartnerController::class, 'show']);
 // cart
-Route::get('/cart',[CartController::class, 'index']);
-Route::post('/cart-store',[CartController::class, 'redirectCart'])->name('cart-store');
-Route::get('/cart-delete/{id}',[CartController::class, 'destroy'])->name('cart-delete');
+Route::get('/cart', [CartController::class, 'index']);
+Route::post('/cart-store', [CartController::class, 'redirectCart'])->name('cart-store');
+Route::get('/cart-delete/{id}', [CartController::class, 'destroy'])->name('cart-delete');
 // transaction
-Route::post('/cart-redirect',[CartController::class, 'showDetailPayment'])->name('cart-redirect');
-// Route::post('/cart-payment/{id}',[CartController::class, 'paymentProses'])->name('cart-payment');
-Route::post('/cart-payment',[CartController::class, 'paymentProses'])->name('cart-payment');
+Route::post('/cart-redirect', [CartController::class, 'showDetailPayment'])->name('cart-redirect');
+Route::post('/cart-payment', [CartController::class, 'paymentProses'])->name('cart-payment');
 
-// softdelete product
-Route::get('/products-deleted', [ProductController::class, 'deletedProduct']);
-Route::get('/products/{id}/restore',[ProductController::class,'restore']);
-Route::get('/products/{id}/forceDelete',[ProductController::class,'forceDelete']);
+
 
 // history
 Route::get('/history', [TransactionController::class, 'history']);
@@ -63,17 +58,7 @@ Route::get('/history', [TransactionController::class, 'history']);
 
 // home end
 
-Route::get('/detail', function () {
-    return view('detail');
-});
 
-Route::get('/beli', function () {
-    return view('beli');
-});
-
-Route::get('/mitra', function () {
-    return view('mitra');
-});
 
 // halaman admin
 
@@ -99,19 +84,16 @@ Route::resource('transaksi', TransactionController::class);
 Route::resource('cart', CartController::class);
 
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified', 'must-admin'])->name('dashboard');
 
 
 Route::resource('product', ProductController::class);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'must-admin'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // !product
-    // Route::get('/product', [ProductController::class, 'index'])->name('productMenu');
-    // Route::get('/social', [SocialMediaController::class, 'index'])->name('socialMenu');
 
     // !route halaman admin
     Route::get('/product', [ProductController::class, 'index'])->name('productMenu');
@@ -120,13 +102,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/review', [ReviewController::class, 'index'])->name('reviewMenu');
     Route::get('/user', [UserController::class, 'index'])->name('userMenu');
     Route::get('/transaksi', [TransactionController::class, 'index'])->name('transaksiMenu');
-    // Route::get('/user', [RegisteredUserController::class, 'index'])->name('userMenu');
-    // Route::get('/product', [ProductController::class, 'index']);
-    // create
-    // Route::post('/product', [ProductController::class, 'store']);
 
-    // // delete
-    // Route::delete('/product-delete/{id}', [ProductController::class, 'destroy']);
+    // softdelete product
+    Route::get('/products-deleted', [ProductController::class, 'deletedProduct']);
+    Route::get('/products/{id}/restore', [ProductController::class, 'restore']);
+    Route::get('/products/{id}/forceDelete', [ProductController::class, 'forceDelete']);
 });
 
 require __DIR__ . '/auth.php';
