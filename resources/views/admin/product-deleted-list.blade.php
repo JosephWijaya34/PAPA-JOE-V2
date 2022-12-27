@@ -81,9 +81,6 @@
                                                         Kategori</th>
                                                     <th scope="col"
                                                         class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
-                                                        Mitra</th>
-                                                    <th scope="col"
-                                                        class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
                                                         Action</th>
 
                                                 </tr>
@@ -155,9 +152,7 @@
                                                         @endif
 
                                                     </td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                        NAMA MITRA
-                                                    </td>
+
 
                                                     <td
                                                         class="relative whitespace-nowrap py-4 pl-3 pr-4 text-center text-sm font-medium sm:pr-6">
@@ -165,13 +160,10 @@
                                                         <a href="/products/{{$product->id}}/restore"
                                                             class="text-indigo-600 hover:text-indigo-900">Restore
                                                         </a>
-{{--                                                         
-                                                        <a href="/products/{{$product->id}}/restore"
-                                                            class="text-indigo-600 hover:text-indigo-900">Restore
+
+                                                        <a href="/products/{{$product->id}}/forceDelete"
+                                                            class="text-red-600 hover:text-red-900">Delete
                                                         </a>
-                                                         --}}
-                                                     
-                                                       
 
                                                       
                                                     </td>
