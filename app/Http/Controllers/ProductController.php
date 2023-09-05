@@ -261,23 +261,23 @@ class ProductController extends Controller
         return view('admin.product-deleted-list', ['products' => $product]);
     }
 
-    // soft delete 
+    // soft delete
 
     public function restore($id)
     {
         $deletedProduct = product::withTrashed()->where('id', $id)->restore();
         return redirect('/product');
     }
-    // public function forceDelete(Request $request, $id)
-    // {
-    //     $deletedProduct = product::withTrashed()->where('id',$id)->forceDelete();
-    //     // foreach ($request->mitra as $mitra) {
-    //     //     // attach data ke table
-    //     //     $partner = Partner::find($mitra);
-    //     //     $deletedProduct->partners()->attach($partner);
-    //     // }
-    //     return redirect('/product');
-    // }
+    public function forceDelete(Request $request, $id)
+    {
+        $deletedProduct = product::withTrashed()->where('id',$id)->forceDelete();
+        // foreach ($request->mitra as $mitra) {
+        //     // attach data ke table
+        //     $partner = Partner::find($mitra);
+        //     $deletedProduct->partners()->attach($partner);
+        // }
+        return redirect('/product');
+    }
 
 
 }
